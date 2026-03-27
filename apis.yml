@@ -1,0 +1,37 @@
+aid: whatfix
+name: Whatfix
+description: >-
+  Whatfix is a digital adoption platform providing SaaS management, in-app
+  guidance, workflow automation, and analytics to help organizations optimize
+  software usage, drive user adoption, and manage their SaaS portfolio
+  effectively.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - SaaS Management
+  - Digital Adoption
+  - User Onboarding
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/whatfix/refs/heads/main/apis.yml
+created: '2026-03-27'
+modified: '2026-03-27'
+specificationVersion: '0.19'
+apis:
+  - aid: whatfix:whatfix
+    name: Whatfix
+    description: >-
+      Whatfix is a digital adoption platform providing SaaS management, in-app
+      guidance, workflow automation, and analytics.
+    humanURL: https://whatfix.com
+    tags:
+      - SaaS Management
+      - Digital Adoption
+    properties:
+      - type: Documentation
+        url: https://whatfix.com
+common:
+  - type: Website
+    url: https://whatfix.com
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
