@@ -8,8 +8,8 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - SaaS Management
   - Digital Adoption
+  - SaaS Management
   - User Onboarding
 url: >-
   https://raw.githubusercontent.com/api-evangelist/whatfix/refs/heads/main/apis.yml
@@ -24,8 +24,8 @@ apis:
       guidance, workflow automation, and analytics.
     humanURL: https://whatfix.com
     tags:
-      - SaaS Management
       - Digital Adoption
+      - SaaS Management
     properties:
       - type: Documentation
         url: https://whatfix.com
