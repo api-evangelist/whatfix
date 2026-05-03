@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/whatfix/main/json-schema/whatfix-content-schema.json",
+  "title": "Whatfix Content",
+  "description": "Schema representing a Whatfix content item such as a flow, tooltip, task list, smart tip, beacon, popup, survey, article, or video.",
+  "type": "object",
+  "properties": {
+    "contentId": {
+      "type": "string",
+      "description": "Unique identifier for the content item."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the content item."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["Flow", "Tooltip", "TaskList", "SmartTip", "Beacon", "Popup", "Survey", "Article", "Video"],
+      "description": "Type of Whatfix content."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Draft", "Published", "Archived"],
+      "description": "Publication status of the content."
+    },
+    "targetUrl": {
+      "type": "string",
+      "description": "URL pattern where this content is displayed (supports wildcards)."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this content item was created."
+    },
+    "modifiedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this content item was last modified."
+    },
+    "viewCount": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total number of times this content has been viewed."
+    }
+  },
+  "required": ["contentId", "name", "type", "status"]
+}

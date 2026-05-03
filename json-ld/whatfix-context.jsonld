@@ -1,0 +1,48 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "whatfix": "https://whatfix.com/vocab#",
+
+    "DigitalAdoptionPlatform": "whatfix:DigitalAdoptionPlatform",
+    "EndUser": "whatfix:EndUser",
+    "Content": "whatfix:Content",
+    "Flow": "whatfix:Flow",
+    "Tooltip": "whatfix:Tooltip",
+    "TaskList": "whatfix:TaskList",
+    "SmartTip": "whatfix:SmartTip",
+    "Beacon": "whatfix:Beacon",
+    "Survey": "whatfix:Survey",
+    "Segment": "whatfix:Segment",
+    "FlowAnalytics": "whatfix:FlowAnalytics",
+
+    "userId": "whatfix:userId",
+    "contentId": "whatfix:contentId",
+    "flowId": "whatfix:flowId",
+    "segmentId": "whatfix:segmentId",
+    "targetUrl": "whatfix:targetUrl",
+    "viewCount": "whatfix:viewCount",
+    "completionRate": "whatfix:completionRate",
+    "avgTimeToComplete": "whatfix:avgTimeToComplete",
+    "lastSeenAt": "whatfix:lastSeenAt",
+    "segmentationAttributes": "whatfix:segmentationAttributes",
+    "inAppGuidance": "whatfix:inAppGuidance",
+    "selfHelp": "whatfix:selfHelp",
+
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "email": "schema:email",
+    "identifier": "schema:identifier",
+    "dateCreated": "schema:dateCreated",
+    "dateModified": "schema:dateModified",
+    "status": "schema:status",
+    "knowsAbout": "schema:knowsAbout",
+    "audience": "schema:audience",
+
+    "SoftwareApplication": "schema:SoftwareApplication",
+    "Person": "schema:Person",
+    "Action": "schema:Action",
+    "Event": "schema:Event",
+    "Thing": "schema:Thing"
+  }
+}

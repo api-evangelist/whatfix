@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/whatfix/main/json-schema/whatfix-end-user-schema.json",
+  "title": "Whatfix End User",
+  "description": "Schema representing a Whatfix end user tracked for digital adoption analytics and content segmentation.",
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "string",
+      "description": "Unique identifier for the end user."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address of the end user."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the end user."
+    },
+    "attributes": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Custom key-value attributes used for segmentation (e.g., role, department, location, tier).",
+      "examples": [
+        { "role": "Manager", "department": "HR", "location": "New York" }
+      ]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when this user was first tracked by Whatfix."
+    },
+    "lastSeenAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when this user was last active on a Whatfix-enabled page."
+    }
+  },
+  "required": ["userId"]
+}

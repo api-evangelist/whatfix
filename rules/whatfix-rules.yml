@@ -1,0 +1,110 @@
+extends: spectral:oas
+rules:
+
+  whatfix-account-id-in-path:
+    description: All Whatfix API paths must include {accountId} as the first path segment.
+    message: Path '{{path}}' must start with /{accountId}.
+    severity: error
+    given: "$.paths.*~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/\\{accountId\\}"
+
+  whatfix-operation-ids-camel-case:
+    description: All operationIds should use camelCase.
+    message: OperationId '{{value}}' should use camelCase.
+    severity: warn
+    given: "$.paths.*.*.operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  whatfix-analytics-date-params:
+    description: Analytics endpoints should have startDate and endDate parameters.
+    message: Analytics endpoint '{{path}}' should document startDate and endDate query parameters.
+    severity: warn
+    given: "$.paths[?(@property.includes('analytics'))].get"
+    then:
+      field: parameters
+      function: truthy
+
+  whatfix-security-required:
+    description: All operations must reference the ApiKeyAuth security scheme.
+    message: Operation '{{path}}' is missing ApiKeyAuth security requirement.
+    severity: error
+    given: "$.paths.*.*"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          properties:
+            security:
+              type: array
+          required:
+            - security
+
+  whatfix-response-200-defined:
+    description: All GET operations must define a 200 response.
+    message: GET operation '{{path}}' must define a 200 response.
+    severity: error
+    given: "$.paths.*.get"
+    then:
+      field: responses.200
+      function: truthy
+
+  whatfix-pagination-on-list-endpoints:
+    description: List endpoints (returning arrays) should include pagination in response schema.
+    message: List endpoint '{{path}}' response should include pagination object.
+    severity: warn
+    given: "$.paths.*.get.responses.200.content.application/json.schema"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          properties:
+            pagination:
+              type: object
+
+  whatfix-error-responses-defined:
+    description: All operations should define 401 and 403 error responses.
+    message: Operation '{{path}}' should define 401 and 403 responses.
+    severity: warn
+    given: "$.paths.*.*"
+    then:
+      field: responses
+      function: schema
+      functionOptions:
+        schema:
+          required:
+            - '401'
+            - '403'
+
+  whatfix-tags-on-operations:
+    description: All operations must have at least one tag.
+    message: Operation '{{path}}' must have at least one tag.
+    severity: error
+    given: "$.paths.*.*"
+    then:
+      field: tags
+      function: truthy
+
+  whatfix-kebab-case-paths:
+    description: Path segments (excluding parameters) should use kebab-case.
+    message: Path segment in '{{path}}' should use kebab-case.
+    severity: warn
+    given: "$.paths.*~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/\\{[a-zA-Z]+\\}|/[a-z0-9-]+)*$"
+
+  whatfix-description-on-operations:
+    description: All operations should have a description.
+    message: Operation '{{path}}' is missing a description.
+    severity: warn
+    given: "$.paths.*.*"
+    then:
+      field: description
+      function: truthy

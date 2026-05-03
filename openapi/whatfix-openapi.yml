@@ -1,0 +1,597 @@
+openapi: 3.0.3
+info:
+  title: Whatfix API
+  description: >-
+    The Whatfix REST API enables programmatic access to Whatfix platform operations
+    including end-user management, content management, flow analytics, segmentation,
+    and report downloads. The API is stateless and uses API token authentication
+    via the x-whatfix-integration-key header.
+  version: v1
+  contact:
+    name: Whatfix Support
+    url: https://support.whatfix.com
+    email: support@whatfix.com
+  termsOfService: https://whatfix.com/terms-of-service/
+servers:
+  - url: https://whatfix.com/api/v1
+    description: Whatfix REST API v1
+
+security:
+  - ApiKeyAuth: []
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-whatfix-integration-key
+      description: >-
+        User API token obtained from the Whatfix dashboard. Pass your registered
+        Whatfix email address in the x-whatfix-user header as well.
+
+  parameters:
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Your Whatfix account identifier.
+      schema:
+        type: string
+
+    PageParam:
+      name: page
+      in: query
+      required: false
+      description: Page number for paginated results (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+
+    PageSizeParam:
+      name: pageSize
+      in: query
+      required: false
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+
+    StartDateParam:
+      name: startDate
+      in: query
+      required: false
+      description: Start date for analytics range (ISO 8601 date).
+      schema:
+        type: string
+        format: date
+
+    EndDateParam:
+      name: endDate
+      in: query
+      required: false
+      description: End date for analytics range (ISO 8601 date).
+      schema:
+        type: string
+        format: date
+
+  schemas:
+    EndUser:
+      type: object
+      description: A Whatfix end user tracked for analytics and segmentation.
+      properties:
+        userId:
+          type: string
+          description: Unique identifier for the end user.
+        email:
+          type: string
+          format: email
+          description: Email address of the end user.
+        name:
+          type: string
+          description: Display name of the end user.
+        attributes:
+          type: object
+          additionalProperties: true
+          description: Custom key-value attributes for segmentation (role, department, etc.).
+        createdAt:
+          type: string
+          format: date-time
+          description: When this user was first tracked.
+        lastSeenAt:
+          type: string
+          format: date-time
+          description: When this user was last active.
+
+    EndUserList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EndUser'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    Content:
+      type: object
+      description: A Whatfix content item (flow, tooltip, task list, smart tip, etc.).
+      properties:
+        contentId:
+          type: string
+          description: Unique identifier for the content item.
+        name:
+          type: string
+          description: Name/title of the content item.
+        type:
+          type: string
+          enum: [Flow, Tooltip, TaskList, SmartTip, Beacon, Popup, Survey, Article, Video]
+          description: Type of Whatfix content.
+        status:
+          type: string
+          enum: [Draft, Published, Archived]
+          description: Publication status of the content.
+        targetUrl:
+          type: string
+          description: URL pattern where this content is displayed.
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+        viewCount:
+          type: integer
+          description: Total number of times this content has been viewed.
+
+    ContentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Content'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    FlowAnalytics:
+      type: object
+      description: Analytics data for a Whatfix flow.
+      properties:
+        flowId:
+          type: string
+          description: Unique identifier for the flow.
+        flowName:
+          type: string
+          description: Name of the flow.
+        views:
+          type: integer
+          description: Total number of times the flow was viewed.
+        completions:
+          type: integer
+          description: Total number of times the flow was completed.
+        completionRate:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+          description: Percentage of views that resulted in completion.
+        avgTimeToComplete:
+          type: number
+          description: Average time in seconds to complete the flow.
+
+    FlowAnalyticsList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowAnalytics'
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+
+    Segment:
+      type: object
+      description: A Whatfix user segment for content targeting.
+      properties:
+        segmentId:
+          type: string
+          description: Unique segment identifier.
+        name:
+          type: string
+          description: Display name of the segment.
+        description:
+          type: string
+          description: Description of the segment criteria.
+        userCount:
+          type: integer
+          description: Number of users currently matching this segment.
+        rules:
+          type: array
+          description: Segmentation rules defining which users belong to this segment.
+          items:
+            type: object
+            properties:
+              attribute:
+                type: string
+                description: User attribute to evaluate.
+              operator:
+                type: string
+                enum: [equals, notEquals, contains, startsWith, endsWith, in, notIn]
+              value:
+                description: Value to compare against.
+
+    SegmentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+
+    TaskCompletion:
+      type: object
+      description: Task completion status for an end user.
+      properties:
+        userId:
+          type: string
+        userEmail:
+          type: string
+          format: email
+        taskListId:
+          type: string
+        taskListName:
+          type: string
+        completedTasks:
+          type: integer
+        totalTasks:
+          type: integer
+        completionRate:
+          type: number
+          format: float
+        lastActivityAt:
+          type: string
+          format: date-time
+
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalCount:
+          type: integer
+        totalPages:
+          type: integer
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
+
+paths:
+  /{accountId}/end-users:
+    get:
+      operationId: listEndUsers
+      summary: List End Users
+      description: >-
+        Returns a paginated list of all end users tracked in the Whatfix platform
+        for the specified account. Used for segmentation and analytics integration.
+      tags:
+        - End Users
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PageSizeParam'
+      responses:
+        '200':
+          description: Paginated list of end users.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndUserList'
+        '401':
+          description: Invalid API token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: API token does not have permission for this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /{accountId}/end-users/{userId}:
+    put:
+      operationId: upsertEndUser
+      summary: Upsert End User
+      description: >-
+        Creates or updates an end user record with custom attributes for
+        segmentation. Use this to sync user data from your identity provider
+        or CRM into Whatfix.
+      tags:
+        - End Users
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: userId
+          in: path
+          required: true
+          description: Unique identifier for the end user.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EndUser'
+      responses:
+        '200':
+          description: End user updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndUser'
+        '201':
+          description: End user created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndUser'
+        '400':
+          description: Invalid request body.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /{accountId}/content:
+    get:
+      operationId: listContent
+      summary: List Content
+      description: >-
+        Returns a paginated list of all Whatfix content items (flows, tooltips,
+        task lists, smart tips, etc.) for the specified account.
+      tags:
+        - Content
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PageSizeParam'
+        - name: type
+          in: query
+          required: false
+          description: Filter by content type.
+          schema:
+            type: string
+            enum: [Flow, Tooltip, TaskList, SmartTip, Beacon, Popup, Survey, Article, Video]
+        - name: status
+          in: query
+          required: false
+          description: Filter by content status.
+          schema:
+            type: string
+            enum: [Draft, Published, Archived]
+      responses:
+        '200':
+          description: Paginated list of content items.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentList'
+        '401':
+          description: Invalid API token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /{accountId}/analytics/flows:
+    get:
+      operationId: getFlowAnalytics
+      summary: Get Flow Analytics
+      description: >-
+        Returns analytics data for all flows including view counts, completion rates,
+        and average time-to-complete for the specified date range.
+      tags:
+        - Analytics
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - $ref: '#/components/parameters/StartDateParam'
+        - $ref: '#/components/parameters/EndDateParam'
+      responses:
+        '200':
+          description: Flow analytics data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlowAnalyticsList'
+        '401':
+          description: Invalid API token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /{accountId}/analytics/end-users:
+    get:
+      operationId: getEndUserEngagement
+      summary: Get End User Engagement
+      description: >-
+        Returns engagement analytics broken down by end users, showing content
+        interactions for each user over the specified date range.
+      tags:
+        - Analytics
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - $ref: '#/components/parameters/StartDateParam'
+        - $ref: '#/components/parameters/EndDateParam'
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PageSizeParam'
+      responses:
+        '200':
+          description: End user engagement data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        userId:
+                          type: string
+                        email:
+                          type: string
+                        contentViewed:
+                          type: integer
+                        flowsCompleted:
+                          type: integer
+                        lastActive:
+                          type: string
+                          format: date-time
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+  /{accountId}/analytics/self-help:
+    get:
+      operationId: getSelfHelpAnalytics
+      summary: Get Self Help Analytics
+      description: >-
+        Returns analytics for Self Help widget content, showing which content
+        items were viewed and how many times during the specified period.
+      tags:
+        - Analytics
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - $ref: '#/components/parameters/StartDateParam'
+        - $ref: '#/components/parameters/EndDateParam'
+      responses:
+        '200':
+          description: Self Help content analytics.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        contentId:
+                          type: string
+                        contentName:
+                          type: string
+                        contentType:
+                          type: string
+                        views:
+                          type: integer
+
+  /{accountId}/analytics/task-completion:
+    get:
+      operationId: getUserTaskCompletion
+      summary: Get User Task Completion
+      description: >-
+        Returns task list completion status for each end user, showing individual
+        progress on assigned onboarding or training task lists.
+      tags:
+        - Analytics
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - $ref: '#/components/parameters/StartDateParam'
+        - $ref: '#/components/parameters/EndDateParam'
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PageSizeParam'
+      responses:
+        '200':
+          description: User task completion data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TaskCompletion'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+
+  /{accountId}/reports/summary/mostPopularFlows:
+    get:
+      operationId: getMostPopularFlows
+      summary: Get Most Popular Flows Report
+      description: >-
+        Downloads a report of the most popular flows ranked by view count.
+        Supports CSV format output for integration with analytics tools.
+      tags:
+        - Reports
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - name: format
+          in: query
+          required: false
+          description: Output format.
+          schema:
+            type: string
+            enum: [json, csv]
+            default: json
+        - $ref: '#/components/parameters/StartDateParam'
+        - $ref: '#/components/parameters/EndDateParam'
+      responses:
+        '200':
+          description: Most popular flows report.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlowAnalyticsList'
+            text/csv:
+              schema:
+                type: string
+                description: CSV file with flow analytics data.
+
+  /{accountId}/segments:
+    get:
+      operationId: listSegments
+      summary: List Segments
+      description: >-
+        Returns all user segments defined in the Whatfix account for content
+        targeting and personalization.
+      tags:
+        - Segments
+      parameters:
+        - $ref: '#/components/parameters/AccountId'
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/PageSizeParam'
+      responses:
+        '200':
+          description: List of segments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentList'
+        '401':
+          description: Invalid API token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'

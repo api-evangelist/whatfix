@@ -1,0 +1,479 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Whatfix API"
+  description: "REST API providing access to end-user management, content management, flow analytics, segmentation, and reporting for the Whatfix Digital Adoption Platform."
+  tags:
+    - Digital Adoption
+    - Analytics
+    - Content Management
+    - User Segmentation
+    - SaaS Management
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WHATFIX_API_TOKEN: WHATFIX_API_TOKEN
+      WHATFIX_ACCOUNT_ID: WHATFIX_ACCOUNT_ID
+      WHATFIX_USER_EMAIL: WHATFIX_USER_EMAIL
+
+capability:
+  consumes:
+    - type: http
+      namespace: whatfix
+      baseUri: https://whatfix.com/api/v1
+      description: "Whatfix REST API v1 for digital adoption platform management."
+      authentication:
+        type: apikey
+        key: x-whatfix-integration-key
+        value: "{{WHATFIX_API_TOKEN}}"
+        placement: header
+      resources:
+        - name: end-users
+          path: /{{WHATFIX_ACCOUNT_ID}}/end-users
+          description: "Manage and query end users tracked by Whatfix."
+          operations:
+            - name: list-end-users
+              method: GET
+              description: "Returns a paginated list of all end users tracked in the Whatfix platform."
+              inputParameters:
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page number."
+                - name: pageSize
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Results per page."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: upsert-end-user
+              method: PUT
+              description: "Creates or updates an end user record with custom segmentation attributes."
+              inputParameters:
+                - name: userId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Unique identifier for the end user."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  userId: "{{tools.userId}}"
+                  email: "{{tools.email}}"
+                  name: "{{tools.name}}"
+                  attributes: "{{tools.attributes}}"
+
+        - name: content
+          path: /{{WHATFIX_ACCOUNT_ID}}/content
+          description: "Manage Whatfix content items including flows, tooltips, task lists, and more."
+          operations:
+            - name: list-content
+              method: GET
+              description: "Returns a paginated list of all content items for the account."
+              inputParameters:
+                - name: type
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by content type."
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by content status."
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+                - name: pageSize
+                  in: query
+                  type: integer
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: analytics-flows
+          path: /{{WHATFIX_ACCOUNT_ID}}/analytics/flows
+          description: "Flow analytics including views, completions, and completion rates."
+          operations:
+            - name: get-flow-analytics
+              method: GET
+              description: "Returns analytics data for all flows for the specified date range."
+              inputParameters:
+                - name: startDate
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start date (ISO 8601)."
+                - name: endDate
+                  in: query
+                  type: string
+                  required: false
+                  description: "End date (ISO 8601)."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: analytics-end-users
+          path: /{{WHATFIX_ACCOUNT_ID}}/analytics/end-users
+          description: "End user engagement analytics."
+          operations:
+            - name: get-end-user-engagement
+              method: GET
+              description: "Returns engagement analytics broken down by end user."
+              inputParameters:
+                - name: startDate
+                  in: query
+                  type: string
+                  required: false
+                - name: endDate
+                  in: query
+                  type: string
+                  required: false
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+                - name: pageSize
+                  in: query
+                  type: integer
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: analytics-self-help
+          path: /{{WHATFIX_ACCOUNT_ID}}/analytics/self-help
+          description: "Self Help widget content analytics."
+          operations:
+            - name: get-self-help-analytics
+              method: GET
+              description: "Returns analytics for Self Help widget content views."
+              inputParameters:
+                - name: startDate
+                  in: query
+                  type: string
+                  required: false
+                - name: endDate
+                  in: query
+                  type: string
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: analytics-task-completion
+          path: /{{WHATFIX_ACCOUNT_ID}}/analytics/task-completion
+          description: "Task list completion status per user."
+          operations:
+            - name: get-user-task-completion
+              method: GET
+              description: "Returns task list completion status for each end user."
+              inputParameters:
+                - name: startDate
+                  in: query
+                  type: string
+                  required: false
+                - name: endDate
+                  in: query
+                  type: string
+                  required: false
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+                - name: pageSize
+                  in: query
+                  type: integer
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: reports
+          path: /{{WHATFIX_ACCOUNT_ID}}/reports/summary/mostPopularFlows
+          description: "Report downloads for analytics data."
+          operations:
+            - name: get-most-popular-flows
+              method: GET
+              description: "Downloads a report of the most popular flows ranked by view count."
+              inputParameters:
+                - name: format
+                  in: query
+                  type: string
+                  required: false
+                  description: "Output format: json or csv."
+                - name: startDate
+                  in: query
+                  type: string
+                  required: false
+                - name: endDate
+                  in: query
+                  type: string
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: segments
+          path: /{{WHATFIX_ACCOUNT_ID}}/segments
+          description: "User segments for content targeting."
+          operations:
+            - name: list-segments
+              method: GET
+              description: "Returns all user segments defined in the Whatfix account."
+              inputParameters:
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+                - name: pageSize
+                  in: query
+                  type: integer
+                  required: false
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: whatfix-rest
+      resources:
+        - path: /v1/end-users
+          name: end-users
+          description: "End user management."
+          operations:
+            - method: GET
+              name: list-end-users
+              description: "List all end users."
+              call: "whatfix.list-end-users"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: upsert-end-user
+              description: "Create or update an end user."
+              call: "whatfix.upsert-end-user"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/content
+          name: content
+          description: "Content management."
+          operations:
+            - method: GET
+              name: list-content
+              description: "List all content items."
+              call: "whatfix.list-content"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/analytics/flows
+          name: flow-analytics
+          description: "Flow analytics."
+          operations:
+            - method: GET
+              name: get-flow-analytics
+              description: "Get flow analytics."
+              call: "whatfix.get-flow-analytics"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/analytics/end-users
+          name: user-engagement
+          description: "User engagement analytics."
+          operations:
+            - method: GET
+              name: get-end-user-engagement
+              description: "Get end user engagement."
+              call: "whatfix.get-end-user-engagement"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/analytics/self-help
+          name: self-help-analytics
+          description: "Self help analytics."
+          operations:
+            - method: GET
+              name: get-self-help-analytics
+              description: "Get self help analytics."
+              call: "whatfix.get-self-help-analytics"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/analytics/task-completion
+          name: task-completion
+          description: "Task completion analytics."
+          operations:
+            - method: GET
+              name: get-user-task-completion
+              description: "Get user task completion."
+              call: "whatfix.get-user-task-completion"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/reports/popular-flows
+          name: popular-flows-report
+          description: "Most popular flows report."
+          operations:
+            - method: GET
+              name: get-most-popular-flows
+              description: "Get most popular flows report."
+              call: "whatfix.get-most-popular-flows"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/segments
+          name: segments
+          description: "User segments."
+          operations:
+            - method: GET
+              name: list-segments
+              description: "List all user segments."
+              call: "whatfix.list-segments"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: whatfix-mcp
+      transport: http
+      tools:
+        - name: list-end-users
+          description: "List all end users tracked in Whatfix."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "whatfix.list-end-users"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: upsert-end-user
+          description: "Create or update an end user with segmentation attributes."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "whatfix.upsert-end-user"
+          with:
+            userId: "tools.userId"
+            email: "tools.email"
+            name: "tools.name"
+            attributes: "tools.attributes"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-content
+          description: "List all Whatfix content items (flows, tooltips, task lists, etc.)."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "whatfix.list-content"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-flow-analytics
+          description: "Get flow analytics including views, completions, and completion rates."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "whatfix.get-flow-analytics"
+          with:
+            startDate: "tools.startDate"
+            endDate: "tools.endDate"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-end-user-engagement
+          description: "Get engagement analytics broken down by end user."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "whatfix.get-end-user-engagement"
+          with:
+            startDate: "tools.startDate"
+            endDate: "tools.endDate"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-self-help-analytics
+          description: "Get analytics for Self Help widget content views."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "whatfix.get-self-help-analytics"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-user-task-completion
+          description: "Get task list completion status per end user."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "whatfix.get-user-task-completion"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-most-popular-flows
+          description: "Get report of most popular flows ranked by view count."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "whatfix.get-most-popular-flows"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-segments
+          description: "List all user segments for content targeting."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "whatfix.list-segments"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,14 @@
+{
+  "name": "Whatfix Content",
+  "description": "Structure of a Whatfix content item.",
+  "fields": [
+    { "name": "contentId", "type": "string", "required": true },
+    { "name": "name", "type": "string", "required": true },
+    { "name": "type", "type": "string", "enum": ["Flow", "Tooltip", "TaskList", "SmartTip", "Beacon", "Popup", "Survey", "Article", "Video"], "required": true },
+    { "name": "status", "type": "string", "enum": ["Draft", "Published", "Archived"], "required": true },
+    { "name": "targetUrl", "type": "string", "required": false },
+    { "name": "createdAt", "type": "string", "format": "date-time", "required": false },
+    { "name": "modifiedAt", "type": "string", "format": "date-time", "required": false },
+    { "name": "viewCount", "type": "integer", "required": false }
+  ]
+}

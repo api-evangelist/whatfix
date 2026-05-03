@@ -1,0 +1,43 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://whatfix.com/api/v1/acc_abc123/analytics/flows?startDate=2026-04-01&endDate=2026-04-30",
+    "headers": {
+      "x-whatfix-integration-key": "{{WHATFIX_API_TOKEN}}",
+      "x-whatfix-user": "admin@yourcompany.com"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "flowId": "flow_101",
+          "flowName": "New Employee Onboarding - HR Module",
+          "views": 312,
+          "completions": 289,
+          "completionRate": 92.6,
+          "avgTimeToComplete": 187.4
+        },
+        {
+          "flowId": "flow_102",
+          "flowName": "Expense Report Submission",
+          "views": 156,
+          "completions": 148,
+          "completionRate": 94.9,
+          "avgTimeToComplete": 95.2
+        },
+        {
+          "flowId": "flow_103",
+          "flowName": "PTO Request Workflow",
+          "views": 98,
+          "completions": 87,
+          "completionRate": 88.8,
+          "avgTimeToComplete": 62.1
+        }
+      ],
+      "startDate": "2026-04-01",
+      "endDate": "2026-04-30"
+    }
+  }
+}

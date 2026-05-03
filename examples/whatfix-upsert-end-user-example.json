@@ -1,0 +1,38 @@
+{
+  "request": {
+    "method": "PUT",
+    "url": "https://whatfix.com/api/v1/acc_abc123/end-users/user_003",
+    "headers": {
+      "x-whatfix-integration-key": "{{WHATFIX_API_TOKEN}}",
+      "x-whatfix-user": "admin@yourcompany.com",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "userId": "user_003",
+      "email": "carol@example.com",
+      "name": "Carol Davis",
+      "attributes": {
+        "role": "Director",
+        "department": "Operations",
+        "location": "Austin",
+        "tier": "Enterprise"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "userId": "user_003",
+      "email": "carol@example.com",
+      "name": "Carol Davis",
+      "attributes": {
+        "role": "Director",
+        "department": "Operations",
+        "location": "Austin",
+        "tier": "Enterprise"
+      },
+      "createdAt": "2025-11-01T12:00:00Z",
+      "lastSeenAt": "2026-05-03T10:00:00Z"
+    }
+  }
+}

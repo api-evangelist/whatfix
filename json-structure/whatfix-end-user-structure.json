@@ -1,0 +1,12 @@
+{
+  "name": "Whatfix End User",
+  "description": "Structure of a Whatfix end user for analytics and segmentation.",
+  "fields": [
+    { "name": "userId", "type": "string", "required": true, "description": "Unique user identifier." },
+    { "name": "email", "type": "string", "format": "email", "required": false },
+    { "name": "name", "type": "string", "required": false },
+    { "name": "attributes", "type": "object", "required": false, "description": "Custom segmentation attributes." },
+    { "name": "createdAt", "type": "string", "format": "date-time", "required": false },
+    { "name": "lastSeenAt", "type": "string", "format": "date-time", "required": false }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://whatfix.com/api/v1/acc_abc123/content?type=Flow&status=Published&page=1&pageSize=10",
+    "headers": {
+      "x-whatfix-integration-key": "{{WHATFIX_API_TOKEN}}",
+      "x-whatfix-user": "admin@yourcompany.com"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "contentId": "content_201",
+          "name": "Salesforce Opportunity Creation",
+          "type": "Flow",
+          "status": "Published",
+          "targetUrl": "https://mycompany.salesforce.com/006/*",
+          "createdAt": "2025-10-10T09:00:00Z",
+          "modifiedAt": "2026-03-15T14:20:00Z",
+          "viewCount": 1847
+        },
+        {
+          "contentId": "content_202",
+          "name": "Workday New Hire Setup",
+          "type": "Flow",
+          "status": "Published",
+          "targetUrl": "https://wd5.myworkday.com/*",
+          "createdAt": "2025-09-05T11:30:00Z",
+          "modifiedAt": "2026-02-28T10:00:00Z",
+          "viewCount": 923
+        }
+      ],
+      "pagination": {
+        "page": 1,
+        "pageSize": 10,
+        "totalCount": 47,
+        "totalPages": 5
+      }
+    }
+  }
+}

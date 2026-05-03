@@ -1,0 +1,174 @@
+vocabulary:
+  name: Whatfix Vocabulary
+  description: >-
+    Domain vocabulary for the Whatfix Digital Adoption Platform, covering in-app
+    guidance, content types, user segmentation, analytics, onboarding workflows,
+    and SaaS management concepts.
+  version: '1.0'
+  created: '2026-05-03'
+  modified: '2026-05-03'
+  tags:
+    - Digital Adoption
+    - SaaS Management
+    - User Onboarding
+    - Analytics
+
+  terms:
+
+    - term: Digital Adoption Platform
+      definition: >-
+        A software layer on top of other software that provides in-app guidance,
+        onboarding, and analytics to improve user adoption and proficiency of
+        enterprise applications.
+      tags:
+        - Core
+
+    - term: Flow
+      definition: >-
+        A step-by-step guided walkthrough that takes users through a multi-step
+        process within an application, shown as sequential tooltips or overlays.
+      tags:
+        - Content Type
+
+    - term: Tooltip
+      definition: >-
+        A small contextual overlay attached to a specific UI element that provides
+        a one-step explanation or guidance note.
+      tags:
+        - Content Type
+
+    - term: Task List
+      definition: >-
+        A structured checklist of onboarding or training tasks assigned to users,
+        tracking their completion progress.
+      tags:
+        - Content Type
+
+    - term: Smart Tip
+      definition: >-
+        Proactive contextual guidance that appears automatically based on user
+        behavior patterns to surface relevant help at the right moment.
+      tags:
+        - Content Type
+
+    - term: Beacon
+      definition: >-
+        A visual indicator (usually a pulsing dot) attached to a UI element to
+        draw attention to a new feature or important action.
+      tags:
+        - Content Type
+
+    - term: Self Help
+      definition: >-
+        A widget embedded in applications that provides an on-demand help center
+        with searchable flows, articles, and videos for users who need assistance.
+      tags:
+        - Feature
+
+    - term: Mirror
+      definition: >-
+        A Whatfix product that creates simulated application environments for
+        hands-on training without affecting production data.
+      tags:
+        - Product
+
+    - term: Segment
+      definition: >-
+        A defined group of end users sharing common attribute values (e.g., role,
+        department, location) used to target specific Whatfix content.
+      tags:
+        - Segmentation
+
+    - term: Segmentation Attribute
+      definition: >-
+        A custom key-value pair associated with an end user that allows precise
+        targeting of content (e.g., role=Manager, department=HR).
+      tags:
+        - Segmentation
+
+    - term: End User
+      definition: >-
+        A person interacting with applications instrumented with Whatfix who is
+        tracked for analytics and targeted with content.
+      tags:
+        - User
+
+    - term: Completion Rate
+      definition: >-
+        The percentage of flow or task list views that resulted in the user
+        completing all steps, calculated as completions divided by views.
+      tags:
+        - Analytics
+
+    - term: Engagement
+      definition: >-
+        The measurement of how actively end users interact with Whatfix content,
+        including views, completions, and Self Help searches.
+      tags:
+        - Analytics
+
+    - term: Flow Analytics
+      definition: >-
+        Metrics collected for each Whatfix flow including view counts, completion
+        counts, completion rates, and average time to complete.
+      tags:
+        - Analytics
+
+    - term: In-App Guidance
+      definition: >-
+        Contextual help and instruction delivered directly within a software
+        application at the moment users need it, without requiring them to leave
+        the application.
+      tags:
+        - Feature
+
+    - term: Content Lifecycle Management
+      definition: >-
+        The process of creating, reviewing, approving, publishing, updating, and
+        retiring Whatfix guidance content with governance controls.
+      tags:
+        - Governance
+
+    - term: API Token
+      definition: >-
+        An authentication credential generated in the Whatfix dashboard that is
+        passed as the x-whatfix-integration-key header to authenticate API requests.
+      tags:
+        - Authentication
+
+    - term: Integration Hub
+      definition: >-
+        The Whatfix interface for configuring integrations with external platforms
+        (Salesforce, Workday, SAP, ServiceNow, etc.) to contextualize content.
+      tags:
+        - Integration
+
+    - term: Agentic AI
+      definition: >-
+        Whatfix's AI system comprising specialized agents: Authoring Agent for
+        content lifecycle management, Guidance Agent for contextualizing content,
+        Insights Agent for analytics, and Seek for task automation.
+      tags:
+        - AI
+
+    - term: Product Analytics
+      definition: >-
+        The Whatfix capability for tracking and analyzing how users interact with
+        web and desktop applications through no-code event tracking.
+      tags:
+        - Analytics
+
+    - term: Change Management
+      definition: >-
+        The use of Whatfix to support organizational change by delivering targeted
+        guidance, training, and communication to affected users during software
+        rollouts or process changes.
+      tags:
+        - Use Case
+
+    - term: VDI
+      definition: >-
+        Virtual Desktop Infrastructure; Whatfix supports delivering in-app guidance
+        within VDI environments such as Citrix for enterprise desktop applications.
+      tags:
+        - Deployment
