@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,143 +9,64 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Whatfix
 providerId: whatfix
-publisherName: Whatfix
-serviceCategory: API
+publisherName: Whatfix Inc.
+serviceCategory: Digital Adoption Platform
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Digital Adoption
   - SaaS Management
-  - User Onboarding
-  - In-App Guidance
-  - Analytics
-  - Change Management
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Whatfix API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+  - Contact Sales
+description: FinOps shape for Whatfix is a SaaS platform license - flat platform fee plus user-license fees, with employee-facing apps billed by total licensed users and customer-facing apps billed by monthly active users.
+sources:
+  - https://whatfix.com/pricing/
+notes: Public pricing page confirms the flat-fee + per-user model but provides no dollar figures. Meters reflect the documented billing shape; unit prices remain in the contract.
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Subscription + Per-User
+  billingFrequency: Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
-    - Tax
-    - Credit
+    - Usage
     - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
   ServiceName: Whatfix
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Digital Adoption Platform
   ProviderName: Whatfix
-  PublisherName: Whatfix
-  InvoiceIssuerName: Whatfix
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Whatfix Inc.
+  InvoiceIssuerName: Whatfix Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: platform_subscription
+    unit: month
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
+      - product_line
       - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
+  - name: licensed_users_employee
+    unit: seat
+    aggregation: max
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
+      - product_line
       - tier
-apis:
-  - name: Whatfix API
-    baseURL: https://whatfix.com/api/v1
-    tags:
-      - Digital Adoption
-      - Analytics
-      - Content Management
-      - User Segmentation
-    serviceName: Whatfix API
-    serviceCategory: API
-  - name: Whatfix Android SDK
-    baseURL: ''
-    tags:
-      - Android
-      - Mobile SDK
-      - DAP
-    serviceName: Whatfix Android SDK
-    serviceCategory: API
-  - name: Whatfix iOS SDK
-    baseURL: ''
-    tags:
-      - iOS
-      - Mobile SDK
-      - DAP
-    serviceName: Whatfix iOS SDK
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+  - name: monthly_active_users_customer
+    unit: monthly_active_user
+    aggregation: max
+    dimensions:
+      - product_line
+      - tier
+principles:
+  - name: Visibility
+    description: Use the Whatfix admin / Product Analytics dashboards to track active-user counts feeding the MAU-billed lines, and reconcile against the order form for licensed-seat lines.
+  - name: Allocation
+    description: Allocate by product line (DAP web, mobile, OS, Product Analytics) and by tenant / business unit; tag MAUs in customer-facing apps to the consuming product.
+  - name: Optimization
+    description: Right-size by trimming unused licensed seats at renewal, and by gating which customer surfaces actually count toward MAU billing.
+  - name: Accountability
+    description: Procurement / IT owns the master subscription and renewal; product owners track MAU drift since they directly drive variable cost.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
