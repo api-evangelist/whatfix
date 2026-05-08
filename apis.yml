@@ -3,21 +3,41 @@ url: https://raw.githubusercontent.com/api-evangelist/whatfix/refs/heads/main/ap
 name: Whatfix
 x-type: company
 description: >-
-  Whatfix is a digital adoption platform offering in-app guidance, walkthroughs, self-help, smart tips, and analytics for enterprise SaaS, contact center, and Salesforce environments.
+  Whatfix is a Digital Adoption Platform that delivers in-app guidance, self-help, and product analytics to drive software adoption and user productivity.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Product
   - Digital Adoption
+  - In-App Guidance
   - Onboarding
-  - In-App
-  - Enterprise
+  - Analytics
+  - Self-Help
 created: '2026-05-08'
 modified: '2026-05-08'
 specificationVersion: '0.19'
-apis: []
+apis:
+  - aid: whatfix:whatfix-rest-api
+    name: Whatfix REST API
+    description: >-
+      Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management, content management, flow analytics, segmentation, and report downloads. Stateless API authenticated via the x-whatfix-integration-key header.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.whatfix.com/
+    baseURL: https://whatfix.com/api/v1
+    tags:
+      - Digital Adoption
+      - Analytics
+      - REST
+    properties:
+      - type: Documentation
+        url: https://docs.whatfix.com/
+      - type: Developers
+        url: https://whatfix.com/developers/
+      - type: OpenAPI
+        url: openapi/whatfix-openapi.yml
 common:
   - type: Website
     url: https://whatfix.com/
+  - type: Documentation
+    url: https://docs.whatfix.com/
   - type: Plans
     url: plans/whatfix-plans-pricing.yml
   - type: RateLimits
