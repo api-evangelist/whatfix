@@ -1,7 +1,7 @@
 aid: whatfix
 url: https://raw.githubusercontent.com/api-evangelist/whatfix/refs/heads/main/apis.yml
 name: Whatfix
-x-type: company
+kind: company
 description: >-
   Whatfix is a Digital Adoption Platform that delivers in-app guidance, self-help, and product analytics to drive software adoption and user productivity.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
