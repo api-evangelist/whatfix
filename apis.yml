@@ -2,48 +2,59 @@ aid: whatfix
 url: https://raw.githubusercontent.com/api-evangelist/whatfix/refs/heads/main/apis.yml
 name: Whatfix
 kind: company
-description: >-
-  Whatfix is a Digital Adoption Platform that delivers in-app guidance, self-help, and product analytics to drive software adoption and user productivity.
+description: Whatfix is a Digital Adoption Platform that delivers in-app guidance, self-help, and product analytics to drive
+  software adoption and user productivity.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Digital Adoption
-  - In-App Guidance
-  - Onboarding
-  - Analytics
-  - Self-Help
+- Digital Adoption
+- In-App Guidance
+- Onboarding
+- Analytics
+- Self-Help
 created: '2026-05-08'
-modified: '2026-05-08'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: whatfix:whatfix-rest-api
-    name: Whatfix REST API
-    description: >-
-      Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management, content management, flow analytics, segmentation, and report downloads. Stateless API authenticated via the x-whatfix-integration-key header.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.whatfix.com/
-    baseURL: https://whatfix.com/api/v1
-    tags:
-      - Digital Adoption
-      - Analytics
-      - REST
-    properties:
-      - type: Documentation
-        url: https://docs.whatfix.com/
-      - type: Developers
-        url: https://whatfix.com/developers/
-      - type: OpenAPI
-        url: openapi/whatfix-openapi.yml
-common:
-  - type: Website
-    url: https://whatfix.com/
+- aid: whatfix:whatfix-rest-api
+  name: Whatfix REST API
+  description: Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management,
+    content management, flow analytics, segmentation, and report downloads. Stateless API authenticated via the x-whatfix-integration-key
+    header.
+  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.whatfix.com/
+  baseURL: https://whatfix.com/api/v1
+  tags:
+  - Digital Adoption
+  - Analytics
+  - REST
+  properties:
   - type: Documentation
     url: https://docs.whatfix.com/
-  - type: Plans
-    url: plans/whatfix-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/whatfix-rate-limits.yml
-  - type: FinOps
-    url: finops/whatfix-finops.yml
+  - type: Developers
+    url: https://whatfix.com/developers/
+  - type: OpenAPI
+    url: openapi/whatfix-openapi.yml
+  - type: NaftikoCapability
+    url: capabilities/whatfix-analytics.yaml
+  - type: NaftikoCapability
+    url: capabilities/whatfix-content.yaml
+  - type: NaftikoCapability
+    url: capabilities/whatfix-end-users.yaml
+  - type: NaftikoCapability
+    url: capabilities/whatfix-reports.yaml
+  - type: NaftikoCapability
+    url: capabilities/whatfix-segments.yaml
+common:
+- type: Website
+  url: https://whatfix.com/
+- type: Documentation
+  url: https://docs.whatfix.com/
+- type: Plans
+  url: plans/whatfix-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/whatfix-rate-limits.yml
+- type: FinOps
+  url: finops/whatfix-finops.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

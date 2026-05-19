@@ -1,0 +1,87 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Whatfix API — Content
+  description: 'Whatfix API — Content. 1 operations. Lead operation: List Content. Self-contained Naftiko capability covering
+    one Whatfix business surface.'
+  tags:
+  - Whatfix
+  - Content
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WHATFIX_API_KEY: WHATFIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: whatfix-content
+    baseUri: https://whatfix.com/api/v1
+    description: Whatfix API — Content business capability. Self-contained, no shared references.
+    resources:
+    - name: accountId-content
+      path: /{accountId}/content
+      operations:
+      - name: listcontent
+        method: GET
+        description: List Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: type
+          in: query
+          type: string
+          description: Filter by content type.
+        - name: status
+          in: query
+          type: string
+          description: Filter by content status.
+    authentication:
+      type: apikey
+      key: x-whatfix-integration-key
+      value: '{{env.WHATFIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: whatfix-content-rest
+    port: 8080
+    description: REST adapter for Whatfix API — Content. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/{accountid}/content
+      name: accountid-content
+      description: REST surface for accountId-content.
+      operations:
+      - method: GET
+        name: listcontent
+        description: List Content
+        call: whatfix-content.listcontent
+        with:
+          type: rest.type
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: whatfix-content-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Whatfix API — Content. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-content
+      description: List Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: whatfix-content.listcontent
+      with:
+        type: tools.type
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.

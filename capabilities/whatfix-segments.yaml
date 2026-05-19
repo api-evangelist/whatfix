@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Whatfix API — Segments
+  description: 'Whatfix API — Segments. 1 operations. Lead operation: List Segments. Self-contained Naftiko capability covering
+    one Whatfix business surface.'
+  tags:
+  - Whatfix
+  - Segments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WHATFIX_API_KEY: WHATFIX_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: whatfix-segments
+    baseUri: https://whatfix.com/api/v1
+    description: Whatfix API — Segments business capability. Self-contained, no shared references.
+    resources:
+    - name: accountId-segments
+      path: /{accountId}/segments
+      operations:
+      - name: listsegments
+        method: GET
+        description: List Segments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: x-whatfix-integration-key
+      value: '{{env.WHATFIX_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: whatfix-segments-rest
+    port: 8080
+    description: REST adapter for Whatfix API — Segments. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/{accountid}/segments
+      name: accountid-segments
+      description: REST surface for accountId-segments.
+      operations:
+      - method: GET
+        name: listsegments
+        description: List Segments
+        call: whatfix-segments.listsegments
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: whatfix-segments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Whatfix API — Segments. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-segments
+      description: List Segments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: whatfix-segments.listsegments
+      outputParameters:
+      - type: object
+        mapping: $.
