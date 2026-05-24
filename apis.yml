@@ -59,6 +59,8 @@ common:
     url: rate-limits/whatfix-rate-limits.yml
   - type: FinOps
     url: finops/whatfix-finops.yml
+  - type: LLMsTxt
+    url: https://whatfix.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
