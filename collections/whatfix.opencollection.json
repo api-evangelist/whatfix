@@ -1,0 +1,377 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Whatfix API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-whatfix-integration-key",
+      "value": "{{x-whatfix-integration-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "End Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List End Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://whatfix.com/api/v1/:accountId/end-users",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Your Whatfix account identifier."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results (1-based)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all end users tracked in the Whatfix platform for the specified account. Used for segmentation and analytics integration."
+        },
+        {
+          "info": {
+            "name": "Upsert End User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://whatfix.com/api/v1/:accountId/end-users/:userId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Your Whatfix account identifier."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the end user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates an end user record with custom attributes for segmentation. Use this to sync user data from your identity provider or CRM into Whatfix."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Content",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://whatfix.com/api/v1/:accountId/content",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Your Whatfix account identifier."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results (1-based)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by content type."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by content status."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all Whatfix content items (flows, tooltips, task lists, smart tips, etc.) for the specified account."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Analytics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Flow Analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://whatfix.com/api/v1/:accountId/analytics/flows",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Your Whatfix account identifier."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for analytics range (ISO 8601 date)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for analytics range (ISO 8601 date)."
+              }
+            ]
+          },
+          "docs": "Returns analytics data for all flows including view counts, completion rates, and average time-to-complete for the specified date range."
+        },
+        {
+          "info": {
+            "name": "Get End User Engagement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://whatfix.com/api/v1/:accountId/analytics/end-users",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Your Whatfix account identifier."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for analytics range (ISO 8601 date)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for analytics range (ISO 8601 date)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results (1-based)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns engagement analytics broken down by end users, showing content interactions for each user over the specified date range."
+        },
+        {
+          "info": {
+            "name": "Get Self Help Analytics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://whatfix.com/api/v1/:accountId/analytics/self-help",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Your Whatfix account identifier."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for analytics range (ISO 8601 date)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for analytics range (ISO 8601 date)."
+              }
+            ]
+          },
+          "docs": "Returns analytics for Self Help widget content, showing which content items were viewed and how many times during the specified period."
+        },
+        {
+          "info": {
+            "name": "Get User Task Completion",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://whatfix.com/api/v1/:accountId/analytics/task-completion",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Your Whatfix account identifier."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for analytics range (ISO 8601 date)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for analytics range (ISO 8601 date)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results (1-based)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns task list completion status for each end user, showing individual progress on assigned onboarding or training task lists."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Most Popular Flows Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://whatfix.com/api/v1/:accountId/reports/summary/mostPopularFlows",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Your Whatfix account identifier."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output format."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for analytics range (ISO 8601 date)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for analytics range (ISO 8601 date)."
+              }
+            ]
+          },
+          "docs": "Downloads a report of the most popular flows ranked by view count. Supports CSV format output for integration with analytics tools."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Segments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://whatfix.com/api/v1/:accountId/segments",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Your Whatfix account identifier."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results (1-based)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all user segments defined in the Whatfix account for content targeting and personalization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
