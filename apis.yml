@@ -5,7 +5,7 @@ kind: company
 description: >-
   Whatfix is a Digital Adoption Platform that delivers in-app guidance, self-help, and product analytics to drive
   software adoption and user productivity.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Digital Adoption
   - In-App Guidance
@@ -22,7 +22,7 @@ apis:
       Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management, content
       management, flow analytics, segmentation, and report downloads. Stateless API authenticated via the
       x-whatfix-integration-key header.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.whatfix.com/
     baseURL: https://whatfix.com/api/v1
     tags:
