@@ -37,6 +37,12 @@ apis:
       - type: OpenAPI
         url: openapi/whatfix-openapi.yml
 common:
+  - type: TrustCenter
+    url: security/whatfix-trust-center.yml
+  - type: DomainSecurity
+    url: security/whatfix-domain-security.yml
+  - type: Authentication
+    url: authentication/whatfix-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/whatfix
   - type: LinkedIn
@@ -53,6 +59,8 @@ common:
     url: finops/whatfix-finops.yml
   - type: LlmsText
     url: https://whatfix.com/llms.txt
+  - url: https://whatfix.com/blog/feed/
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

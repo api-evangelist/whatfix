@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/whatfix-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: x-whatfix-integration-key
+  description: User API token obtained from the Whatfix dashboard. Pass your registered Whatfix
+    email address in the x-whatfix-user header as well.
+  sources:
+  - openapi/whatfix-openapi.yml
