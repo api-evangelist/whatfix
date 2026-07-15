@@ -37,6 +37,8 @@ apis:
       - type: OpenAPI
         url: openapi/whatfix-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/whatfix-agentic-access.yml
   - type: TrustCenter
     url: security/whatfix-trust-center.yml
   - type: DomainSecurity
