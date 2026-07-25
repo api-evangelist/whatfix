@@ -1,0 +1,178 @@
+openapi: 3.0.3
+info:
+  title: Whatfix Analytics End Users API
+  description: The Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management, content management, flow analytics, segmentation, and report downloads. The API is stateless and uses API token authentication via the x-whatfix-integration-key header.
+  version: v1
+  contact:
+    name: Whatfix Support
+    url: https://support.whatfix.com
+    email: support@whatfix.com
+  termsOfService: https://whatfix.com/terms-of-service/
+servers:
+- url: https://whatfix.com/api/v1
+  description: Whatfix REST API v1
+security:
+- ApiKeyAuth: []
+tags:
+- name: End Users
+paths:
+  /{accountId}/end-users:
+    get:
+      operationId: listEndUsers
+      summary: List End Users
+      description: Returns a paginated list of all end users tracked in the Whatfix platform for the specified account. Used for segmentation and analytics integration.
+      tags:
+      - End Users
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/PageSizeParam'
+      responses:
+        '200':
+          description: Paginated list of end users.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndUserList'
+        '401':
+          description: Invalid API token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: API token does not have permission for this resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /{accountId}/end-users/{userId}:
+    put:
+      operationId: upsertEndUser
+      summary: Upsert End User
+      description: Creates or updates an end user record with custom attributes for segmentation. Use this to sync user data from your identity provider or CRM into Whatfix.
+      tags:
+      - End Users
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: userId
+        in: path
+        required: true
+        description: Unique identifier for the end user.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EndUser'
+      responses:
+        '200':
+          description: End user updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndUser'
+        '201':
+          description: End user created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndUser'
+        '400':
+          description: Invalid request body.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      required: false
+      description: Page number for paginated results (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Your Whatfix account identifier.
+      schema:
+        type: string
+    PageSizeParam:
+      name: pageSize
+      in: query
+      required: false
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
+    EndUser:
+      type: object
+      description: A Whatfix end user tracked for analytics and segmentation.
+      properties:
+        userId:
+          type: string
+          description: Unique identifier for the end user.
+        email:
+          type: string
+          format: email
+          description: Email address of the end user.
+        name:
+          type: string
+          description: Display name of the end user.
+        attributes:
+          type: object
+          additionalProperties: true
+          description: Custom key-value attributes for segmentation (role, department, etc.).
+        createdAt:
+          type: string
+          format: date-time
+          description: When this user was first tracked.
+        lastSeenAt:
+          type: string
+          format: date-time
+          description: When this user was last active.
+    EndUserList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/EndUser'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalCount:
+          type: integer
+        totalPages:
+          type: integer
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-whatfix-integration-key
+      description: User API token obtained from the Whatfix dashboard. Pass your registered Whatfix email address in the x-whatfix-user header as well.

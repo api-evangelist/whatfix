@@ -1,0 +1,143 @@
+openapi: 3.0.3
+info:
+  title: Whatfix Analytics Segments API
+  description: The Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management, content management, flow analytics, segmentation, and report downloads. The API is stateless and uses API token authentication via the x-whatfix-integration-key header.
+  version: v1
+  contact:
+    name: Whatfix Support
+    url: https://support.whatfix.com
+    email: support@whatfix.com
+  termsOfService: https://whatfix.com/terms-of-service/
+servers:
+- url: https://whatfix.com/api/v1
+  description: Whatfix REST API v1
+security:
+- ApiKeyAuth: []
+tags:
+- name: Segments
+paths:
+  /{accountId}/segments:
+    get:
+      operationId: listSegments
+      summary: List Segments
+      description: Returns all user segments defined in the Whatfix account for content targeting and personalization.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/PageSizeParam'
+      responses:
+        '200':
+          description: List of segments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentList'
+        '401':
+          description: Invalid API token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      required: false
+      description: Page number for paginated results (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Your Whatfix account identifier.
+      schema:
+        type: string
+    PageSizeParam:
+      name: pageSize
+      in: query
+      required: false
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+  schemas:
+    Segment:
+      type: object
+      description: A Whatfix user segment for content targeting.
+      properties:
+        segmentId:
+          type: string
+          description: Unique segment identifier.
+        name:
+          type: string
+          description: Display name of the segment.
+        description:
+          type: string
+          description: Description of the segment criteria.
+        userCount:
+          type: integer
+          description: Number of users currently matching this segment.
+        rules:
+          type: array
+          description: Segmentation rules defining which users belong to this segment.
+          items:
+            type: object
+            properties:
+              attribute:
+                type: string
+                description: User attribute to evaluate.
+              operator:
+                type: string
+                enum:
+                - equals
+                - notEquals
+                - contains
+                - startsWith
+                - endsWith
+                - in
+                - notIn
+              value:
+                description: Value to compare against.
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
+    SegmentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalCount:
+          type: integer
+        totalPages:
+          type: integer
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-whatfix-integration-key
+      description: User API token obtained from the Whatfix dashboard. Pass your registered Whatfix email address in the x-whatfix-user header as well.

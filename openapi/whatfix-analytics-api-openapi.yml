@@ -1,0 +1,272 @@
+openapi: 3.0.3
+info:
+  title: Whatfix Analytics API
+  description: The Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management, content management, flow analytics, segmentation, and report downloads. The API is stateless and uses API token authentication via the x-whatfix-integration-key header.
+  version: v1
+  contact:
+    name: Whatfix Support
+    url: https://support.whatfix.com
+    email: support@whatfix.com
+  termsOfService: https://whatfix.com/terms-of-service/
+servers:
+- url: https://whatfix.com/api/v1
+  description: Whatfix REST API v1
+security:
+- ApiKeyAuth: []
+tags:
+- name: Analytics
+paths:
+  /{accountId}/analytics/flows:
+    get:
+      operationId: getFlowAnalytics
+      summary: Get Flow Analytics
+      description: Returns analytics data for all flows including view counts, completion rates, and average time-to-complete for the specified date range.
+      tags:
+      - Analytics
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/StartDateParam'
+      - $ref: '#/components/parameters/EndDateParam'
+      responses:
+        '200':
+          description: Flow analytics data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlowAnalyticsList'
+        '401':
+          description: Invalid API token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /{accountId}/analytics/end-users:
+    get:
+      operationId: getEndUserEngagement
+      summary: Get End User Engagement
+      description: Returns engagement analytics broken down by end users, showing content interactions for each user over the specified date range.
+      tags:
+      - Analytics
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/StartDateParam'
+      - $ref: '#/components/parameters/EndDateParam'
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/PageSizeParam'
+      responses:
+        '200':
+          description: End user engagement data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        userId:
+                          type: string
+                        email:
+                          type: string
+                        contentViewed:
+                          type: integer
+                        flowsCompleted:
+                          type: integer
+                        lastActive:
+                          type: string
+                          format: date-time
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+  /{accountId}/analytics/self-help:
+    get:
+      operationId: getSelfHelpAnalytics
+      summary: Get Self Help Analytics
+      description: Returns analytics for Self Help widget content, showing which content items were viewed and how many times during the specified period.
+      tags:
+      - Analytics
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/StartDateParam'
+      - $ref: '#/components/parameters/EndDateParam'
+      responses:
+        '200':
+          description: Self Help content analytics.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        contentId:
+                          type: string
+                        contentName:
+                          type: string
+                        contentType:
+                          type: string
+                        views:
+                          type: integer
+  /{accountId}/analytics/task-completion:
+    get:
+      operationId: getUserTaskCompletion
+      summary: Get User Task Completion
+      description: Returns task list completion status for each end user, showing individual progress on assigned onboarding or training task lists.
+      tags:
+      - Analytics
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/StartDateParam'
+      - $ref: '#/components/parameters/EndDateParam'
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/PageSizeParam'
+      responses:
+        '200':
+          description: User task completion data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TaskCompletion'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+components:
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      required: false
+      description: Page number for paginated results (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    EndDateParam:
+      name: endDate
+      in: query
+      required: false
+      description: End date for analytics range (ISO 8601 date).
+      schema:
+        type: string
+        format: date
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Your Whatfix account identifier.
+      schema:
+        type: string
+    PageSizeParam:
+      name: pageSize
+      in: query
+      required: false
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    StartDateParam:
+      name: startDate
+      in: query
+      required: false
+      description: Start date for analytics range (ISO 8601 date).
+      schema:
+        type: string
+        format: date
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
+    TaskCompletion:
+      type: object
+      description: Task completion status for an end user.
+      properties:
+        userId:
+          type: string
+        userEmail:
+          type: string
+          format: email
+        taskListId:
+          type: string
+        taskListName:
+          type: string
+        completedTasks:
+          type: integer
+        totalTasks:
+          type: integer
+        completionRate:
+          type: number
+          format: float
+        lastActivityAt:
+          type: string
+          format: date-time
+    FlowAnalyticsList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowAnalytics'
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+    FlowAnalytics:
+      type: object
+      description: Analytics data for a Whatfix flow.
+      properties:
+        flowId:
+          type: string
+          description: Unique identifier for the flow.
+        flowName:
+          type: string
+          description: Name of the flow.
+        views:
+          type: integer
+          description: Total number of times the flow was viewed.
+        completions:
+          type: integer
+          description: Total number of times the flow was completed.
+        completionRate:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+          description: Percentage of views that resulted in completion.
+        avgTimeToComplete:
+          type: number
+          description: Average time in seconds to complete the flow.
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalCount:
+          type: integer
+        totalPages:
+          type: integer
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-whatfix-integration-key
+      description: User API token obtained from the Whatfix dashboard. Pass your registered Whatfix email address in the x-whatfix-user header as well.

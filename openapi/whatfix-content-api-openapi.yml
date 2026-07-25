@@ -1,0 +1,174 @@
+openapi: 3.0.3
+info:
+  title: Whatfix Analytics Content API
+  description: The Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management, content management, flow analytics, segmentation, and report downloads. The API is stateless and uses API token authentication via the x-whatfix-integration-key header.
+  version: v1
+  contact:
+    name: Whatfix Support
+    url: https://support.whatfix.com
+    email: support@whatfix.com
+  termsOfService: https://whatfix.com/terms-of-service/
+servers:
+- url: https://whatfix.com/api/v1
+  description: Whatfix REST API v1
+security:
+- ApiKeyAuth: []
+tags:
+- name: Content
+paths:
+  /{accountId}/content:
+    get:
+      operationId: listContent
+      summary: List Content
+      description: Returns a paginated list of all Whatfix content items (flows, tooltips, task lists, smart tips, etc.) for the specified account.
+      tags:
+      - Content
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/PageSizeParam'
+      - name: type
+        in: query
+        required: false
+        description: Filter by content type.
+        schema:
+          type: string
+          enum:
+          - Flow
+          - Tooltip
+          - TaskList
+          - SmartTip
+          - Beacon
+          - Popup
+          - Survey
+          - Article
+          - Video
+      - name: status
+        in: query
+        required: false
+        description: Filter by content status.
+        schema:
+          type: string
+          enum:
+          - Draft
+          - Published
+          - Archived
+      responses:
+        '200':
+          description: Paginated list of content items.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentList'
+        '401':
+          description: Invalid API token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      required: false
+      description: Page number for paginated results (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Your Whatfix account identifier.
+      schema:
+        type: string
+    PageSizeParam:
+      name: pageSize
+      in: query
+      required: false
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+  schemas:
+    Content:
+      type: object
+      description: A Whatfix content item (flow, tooltip, task list, smart tip, etc.).
+      properties:
+        contentId:
+          type: string
+          description: Unique identifier for the content item.
+        name:
+          type: string
+          description: Name/title of the content item.
+        type:
+          type: string
+          enum:
+          - Flow
+          - Tooltip
+          - TaskList
+          - SmartTip
+          - Beacon
+          - Popup
+          - Survey
+          - Article
+          - Video
+          description: Type of Whatfix content.
+        status:
+          type: string
+          enum:
+          - Draft
+          - Published
+          - Archived
+          description: Publication status of the content.
+        targetUrl:
+          type: string
+          description: URL pattern where this content is displayed.
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+        viewCount:
+          type: integer
+          description: Total number of times this content has been viewed.
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
+    ContentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Content'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalCount:
+          type: integer
+        totalPages:
+          type: integer
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-whatfix-integration-key
+      description: User API token obtained from the Whatfix dashboard. Pass your registered Whatfix email address in the x-whatfix-user header as well.

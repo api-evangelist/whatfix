@@ -1,0 +1,120 @@
+openapi: 3.0.3
+info:
+  title: Whatfix Analytics Reports API
+  description: The Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management, content management, flow analytics, segmentation, and report downloads. The API is stateless and uses API token authentication via the x-whatfix-integration-key header.
+  version: v1
+  contact:
+    name: Whatfix Support
+    url: https://support.whatfix.com
+    email: support@whatfix.com
+  termsOfService: https://whatfix.com/terms-of-service/
+servers:
+- url: https://whatfix.com/api/v1
+  description: Whatfix REST API v1
+security:
+- ApiKeyAuth: []
+tags:
+- name: Reports
+paths:
+  /{accountId}/reports/summary/mostPopularFlows:
+    get:
+      operationId: getMostPopularFlows
+      summary: Get Most Popular Flows Report
+      description: Downloads a report of the most popular flows ranked by view count. Supports CSV format output for integration with analytics tools.
+      tags:
+      - Reports
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - name: format
+        in: query
+        required: false
+        description: Output format.
+        schema:
+          type: string
+          enum:
+          - json
+          - csv
+          default: json
+      - $ref: '#/components/parameters/StartDateParam'
+      - $ref: '#/components/parameters/EndDateParam'
+      responses:
+        '200':
+          description: Most popular flows report.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FlowAnalyticsList'
+            text/csv:
+              schema:
+                type: string
+                description: CSV file with flow analytics data.
+components:
+  parameters:
+    EndDateParam:
+      name: endDate
+      in: query
+      required: false
+      description: End date for analytics range (ISO 8601 date).
+      schema:
+        type: string
+        format: date
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Your Whatfix account identifier.
+      schema:
+        type: string
+    StartDateParam:
+      name: startDate
+      in: query
+      required: false
+      description: Start date for analytics range (ISO 8601 date).
+      schema:
+        type: string
+        format: date
+  schemas:
+    FlowAnalyticsList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowAnalytics'
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+    FlowAnalytics:
+      type: object
+      description: Analytics data for a Whatfix flow.
+      properties:
+        flowId:
+          type: string
+          description: Unique identifier for the flow.
+        flowName:
+          type: string
+          description: Name of the flow.
+        views:
+          type: integer
+          description: Total number of times the flow was viewed.
+        completions:
+          type: integer
+          description: Total number of times the flow was completed.
+        completionRate:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+          description: Percentage of views that resulted in completion.
+        avgTimeToComplete:
+          type: number
+          description: Average time in seconds to complete the flow.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-whatfix-integration-key
+      description: User API token obtained from the Whatfix dashboard. Pass your registered Whatfix email address in the x-whatfix-user header as well.
