@@ -5,7 +5,20 @@ kind: company
 description: >-
   Whatfix is a Digital Adoption Platform that delivers in-app guidance, self-help, and product analytics to drive
   software adoption and user productivity.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/whatfix.png
 tags:
   - Digital Adoption
   - In-App Guidance
@@ -16,26 +29,76 @@ created: '2026-05-08'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: whatfix:whatfix-rest-api
-    name: Whatfix REST API
-    description: >-
-      Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management, content
-      management, flow analytics, segmentation, and report downloads. Stateless API authenticated via the
-      x-whatfix-integration-key header.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.whatfix.com/
-    baseURL: https://whatfix.com/api/v1
-    tags:
-      - Digital Adoption
-      - Analytics
-      - REST
-    properties:
-      - type: Documentation
-        url: https://docs.whatfix.com/
-      - type: Developers
-        url: https://whatfix.com/developers/
-      - type: OpenAPI
-        url: openapi/whatfix-openapi.yml
+- aid: whatfix:whatfix-analytics-api
+  name: Whatfix Analytics API
+  description: The Analytics API from Whatfix — 4 operation(s) for analytics.
+  humanURL: https://docs.whatfix.com/
+  baseURL: https://whatfix.com/api/v1
+  tags:
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/whatfix-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.whatfix.com/
+  - type: Developers
+    url: https://whatfix.com/developers/
+- aid: whatfix:whatfix-content-api
+  name: Whatfix Content API
+  description: The Content API from Whatfix — 1 operation(s) for content.
+  humanURL: https://docs.whatfix.com/
+  baseURL: https://whatfix.com/api/v1
+  tags:
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/whatfix-content-api-openapi.yml
+  - type: Documentation
+    url: https://docs.whatfix.com/
+  - type: Developers
+    url: https://whatfix.com/developers/
+- aid: whatfix:whatfix-end-users-api
+  name: Whatfix End Users API
+  description: The End Users API from Whatfix — 2 operation(s) for end users.
+  humanURL: https://docs.whatfix.com/
+  baseURL: https://whatfix.com/api/v1
+  tags:
+  - End Users
+  properties:
+  - type: OpenAPI
+    url: openapi/whatfix-end-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.whatfix.com/
+  - type: Developers
+    url: https://whatfix.com/developers/
+- aid: whatfix:whatfix-reports-api
+  name: Whatfix Reports API
+  description: The Reports API from Whatfix — 1 operation(s) for reports.
+  humanURL: https://docs.whatfix.com/
+  baseURL: https://whatfix.com/api/v1
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/whatfix-reports-api-openapi.yml
+  - type: Documentation
+    url: https://docs.whatfix.com/
+  - type: Developers
+    url: https://whatfix.com/developers/
+- aid: whatfix:whatfix-segments-api
+  name: Whatfix Segments API
+  description: The Segments API from Whatfix — 1 operation(s) for segments.
+  humanURL: https://docs.whatfix.com/
+  baseURL: https://whatfix.com/api/v1
+  tags:
+  - Segments
+  properties:
+  - type: OpenAPI
+    url: openapi/whatfix-segments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.whatfix.com/
+  - type: Developers
+    url: https://whatfix.com/developers/
 common:
   - type: AgenticAccess
     url: agentic-access/whatfix-agentic-access.yml
