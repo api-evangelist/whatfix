@@ -1,0 +1,22 @@
+{
+  "provider": "whatfix",
+  "sources": [
+    "whatfix-analytics-api-openapi.yml",
+    "whatfix-content-api-openapi.yml",
+    "whatfix-end-users-api-openapi.yml",
+    "whatfix-reports-api-openapi.yml",
+    "whatfix-segments-api-openapi.yml"
+  ],
+  "outputs": [
+    "whatfix-analytics-api-openapi.yml",
+    "whatfix-content-api-openapi.yml",
+    "whatfix-end-users-api-openapi.yml",
+    "whatfix-reports-api-openapi.yml",
+    "whatfix-segments-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
