@@ -1,0 +1,256 @@
+{
+  "item": [
+    {
+      "id": "687ecab1-b644-4058-9f73-1df3f02293f6",
+      "name": "Content",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c9bb435-856c-42eb-aa18-e11a61a14249",
+          "name": "List Content",
+          "request": {
+            "name": "List Content",
+            "description": {
+              "content": "Returns a paginated list of all Whatfix content items (flows, tooltips, task lists, smart tips, etc.) for the specified account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":accountId",
+                "content"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results (1-based)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "20",
+                  "description": "Number of results per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by content type."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by content status."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) Your Whatfix account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8805e14b-3533-411d-bb2a-288f2cc9f705",
+              "name": "Paginated list of content items.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":accountId",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Your Whatfix account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-whatfix-integration-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"contentId\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"Survey\",\n      \"status\": \"Draft\",\n      \"targetUrl\": \"string\",\n      \"createdAt\": \"1964-11-25T06:33:49.645Z\",\n      \"modifiedAt\": \"1965-11-23T17:16:18.784Z\",\n      \"viewCount\": 1402\n    },\n    {\n      \"contentId\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"Survey\",\n      \"status\": \"Draft\",\n      \"targetUrl\": \"string\",\n      \"createdAt\": \"1953-05-03T13:31:57.023Z\",\n      \"modifiedAt\": \"1987-12-30T08:10:18.305Z\",\n      \"viewCount\": 5311\n    }\n  ],\n  \"pagination\": {\n    \"page\": 5481,\n    \"pageSize\": 7462,\n    \"totalCount\": 6086,\n    \"totalPages\": 4662\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d181841e-c956-4891-96ec-f47cc89a50b6",
+              "name": "Invalid API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":accountId",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Your Whatfix account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-whatfix-integration-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 3814,\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://whatfix.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-whatfix-integration-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d3e3059e-a382-4b84-b413-70bda1c70e70",
+    "name": "Whatfix Analytics Content API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management, content management, flow analytics, segmentation, and report downloads. The API is stateless and uses API token authentication via the x-whatfix-integration-key header.\n\nContact Support:\n Name: Whatfix Support\n Email: support@whatfix.com",
+      "type": "text/plain"
+    }
+  }
+}

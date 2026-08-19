@@ -1,0 +1,631 @@
+{
+  "item": [
+    {
+      "id": "cc81a086-4393-4e7a-a20a-77053c7bdb37",
+      "name": "Analytics",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a5f3f759-5b71-4bd0-af1f-eccbb548c173",
+          "name": "Get Flow Analytics",
+          "request": {
+            "name": "Get Flow Analytics",
+            "description": {
+              "content": "Returns analytics data for all flows including view counts, completion rates, and average time-to-complete for the specified date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":accountId",
+                "analytics",
+                "flows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>",
+                  "description": "Start date for analytics range (ISO 8601 date)."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "End date for analytics range (ISO 8601 date)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) Your Whatfix account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00e25b3f-48bb-44bb-864c-ccdae918b6ec",
+              "name": "Flow analytics data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":accountId",
+                    "analytics",
+                    "flows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Your Whatfix account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-whatfix-integration-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"flowId\": \"string\",\n      \"flowName\": \"string\",\n      \"views\": 5136,\n      \"completions\": 3202,\n      \"completionRate\": 77.96313275641347,\n      \"avgTimeToComplete\": 8532.294714557158\n    },\n    {\n      \"flowId\": \"string\",\n      \"flowName\": \"string\",\n      \"views\": 6654,\n      \"completions\": 518,\n      \"completionRate\": 55.358610383693666,\n      \"avgTimeToComplete\": 9188.929948312325\n    }\n  ],\n  \"startDate\": \"1986-04-28\",\n  \"endDate\": \"1999-02-04\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccf0bc22-1104-416a-9c66-f259c5daae45",
+              "name": "Invalid API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":accountId",
+                    "analytics",
+                    "flows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Your Whatfix account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-whatfix-integration-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7109,\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ef5ed076-ea9e-49b5-9f30-8f5aff650823",
+          "name": "Get End User Engagement",
+          "request": {
+            "name": "Get End User Engagement",
+            "description": {
+              "content": "Returns engagement analytics broken down by end users, showing content interactions for each user over the specified date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":accountId",
+                "analytics",
+                "end-users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>",
+                  "description": "Start date for analytics range (ISO 8601 date)."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "End date for analytics range (ISO 8601 date)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results (1-based)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "20",
+                  "description": "Number of results per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) Your Whatfix account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85c8762a-03eb-4e08-aa95-9703ccbdcd5e",
+              "name": "End user engagement data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":accountId",
+                    "analytics",
+                    "end-users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Your Whatfix account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-whatfix-integration-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"userId\": \"string\",\n      \"email\": \"string\",\n      \"contentViewed\": 5628,\n      \"flowsCompleted\": 5880,\n      \"lastActive\": \"1971-06-11T03:31:51.216Z\"\n    },\n    {\n      \"userId\": \"string\",\n      \"email\": \"string\",\n      \"contentViewed\": 2905,\n      \"flowsCompleted\": 5272,\n      \"lastActive\": \"1969-03-06T21:35:16.731Z\"\n    }\n  ],\n  \"pagination\": {\n    \"page\": 9524,\n    \"pageSize\": 4106,\n    \"totalCount\": 2108,\n    \"totalPages\": 9652\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af22c0fd-8bdd-45c0-ad3f-cd861d62f0f8",
+          "name": "Get Self Help Analytics",
+          "request": {
+            "name": "Get Self Help Analytics",
+            "description": {
+              "content": "Returns analytics for Self Help widget content, showing which content items were viewed and how many times during the specified period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":accountId",
+                "analytics",
+                "self-help"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>",
+                  "description": "Start date for analytics range (ISO 8601 date)."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "End date for analytics range (ISO 8601 date)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) Your Whatfix account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71b70d7d-bb83-4744-bb82-b19d2a39c0ff",
+              "name": "Self Help content analytics.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":accountId",
+                    "analytics",
+                    "self-help"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Your Whatfix account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-whatfix-integration-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"contentId\": \"string\",\n      \"contentName\": \"string\",\n      \"contentType\": \"string\",\n      \"views\": 589\n    },\n    {\n      \"contentId\": \"string\",\n      \"contentName\": \"string\",\n      \"contentType\": \"string\",\n      \"views\": 9860\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e35d81bb-6aa4-4b4c-a853-4d86b246059b",
+          "name": "Get User Task Completion",
+          "request": {
+            "name": "Get User Task Completion",
+            "description": {
+              "content": "Returns task list completion status for each end user, showing individual progress on assigned onboarding or training task lists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":accountId",
+                "analytics",
+                "task-completion"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>",
+                  "description": "Start date for analytics range (ISO 8601 date)."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "End date for analytics range (ISO 8601 date)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results (1-based)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "20",
+                  "description": "Number of results per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) Your Whatfix account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "65397ad8-d5b1-456c-8f6a-1b85adfd34f9",
+              "name": "User task completion data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":accountId",
+                    "analytics",
+                    "task-completion"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Your Whatfix account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-whatfix-integration-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"userId\": \"string\",\n      \"userEmail\": \"pPxFAIu@JsYxWUBO.yxdq\",\n      \"taskListId\": \"string\",\n      \"taskListName\": \"string\",\n      \"completedTasks\": 9964,\n      \"totalTasks\": 8554,\n      \"completionRate\": 1701.577351068202,\n      \"lastActivityAt\": \"2009-12-18T22:16:53.807Z\"\n    },\n    {\n      \"userId\": \"string\",\n      \"userEmail\": \"lqvDmiSJ50xp4re@rwQWfPT.mf\",\n      \"taskListId\": \"string\",\n      \"taskListName\": \"string\",\n      \"completedTasks\": 4926,\n      \"totalTasks\": 8499,\n      \"completionRate\": 7374.952471228634,\n      \"lastActivityAt\": \"1981-04-10T01:45:26.935Z\"\n    }\n  ],\n  \"pagination\": {\n    \"page\": 1591,\n    \"pageSize\": 6241,\n    \"totalCount\": 1598,\n    \"totalPages\": 8627\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://whatfix.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-whatfix-integration-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3356f975-6865-4682-b0f6-bc0a71613f10",
+    "name": "Whatfix Analytics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management, content management, flow analytics, segmentation, and report downloads. The API is stateless and uses API token authentication via the x-whatfix-integration-key header.\n\nContact Support:\n Name: Whatfix Support\n Email: support@whatfix.com",
+      "type": "text/plain"
+    }
+  }
+}

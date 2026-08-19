@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Whatfix Analytics Reports API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-whatfix-integration-key",
+      "value": "{{x-whatfix-integration-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Most Popular Flows Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://whatfix.com/api/v1/:accountId/reports/summary/mostPopularFlows",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Your Whatfix account identifier."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Output format."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for analytics range (ISO 8601 date)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for analytics range (ISO 8601 date)."
+              }
+            ]
+          },
+          "docs": "Downloads a report of the most popular flows ranked by view count. Supports CSV format output for integration with analytics tools."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Whatfix Analytics Content API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-whatfix-integration-key",
+      "value": "{{x-whatfix-integration-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Content",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://whatfix.com/api/v1/:accountId/content",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Your Whatfix account identifier."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results (1-based)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by content type."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by content status."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all Whatfix content items (flows, tooltips, task lists, smart tips, etc.) for the specified account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

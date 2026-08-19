@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Whatfix Analytics End Users API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-whatfix-integration-key",
+      "value": "{{x-whatfix-integration-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "End Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List End Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://whatfix.com/api/v1/:accountId/end-users",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Your Whatfix account identifier."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results (1-based)."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all end users tracked in the Whatfix platform for the specified account. Used for segmentation and analytics integration."
+        },
+        {
+          "info": {
+            "name": "Upsert End User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://whatfix.com/api/v1/:accountId/end-users/:userId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Your Whatfix account identifier."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the end user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates an end user record with custom attributes for segmentation. Use this to sync user data from your identity provider or CRM into Whatfix."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

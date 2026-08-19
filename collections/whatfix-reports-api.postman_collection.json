@@ -1,0 +1,181 @@
+{
+  "item": [
+    {
+      "id": "a1d6c188-afe5-4a87-ab50-2be3a52b743e",
+      "name": "Reports",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e29f1f0c-e394-4bc8-bff0-630ab7cfbae7",
+          "name": "Get Most Popular Flows Report",
+          "request": {
+            "name": "Get Most Popular Flows Report",
+            "description": {
+              "content": "Downloads a report of the most popular flows ranked by view count. Supports CSV format output for integration with analytics tools.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":accountId",
+                "reports",
+                "summary",
+                "mostPopularFlows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "Output format."
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>",
+                  "description": "Start date for analytics range (ISO 8601 date)."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "End date for analytics range (ISO 8601 date)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) Your Whatfix account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f926218b-4237-4784-a34f-9783f50e5c4c",
+              "name": "Most popular flows report.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":accountId",
+                    "reports",
+                    "summary",
+                    "mostPopularFlows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Your Whatfix account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-whatfix-integration-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"flowId\": \"string\",\n      \"flowName\": \"string\",\n      \"views\": 475,\n      \"completions\": 2155,\n      \"completionRate\": 11.045183624493715,\n      \"avgTimeToComplete\": 4190.352113811075\n    },\n    {\n      \"flowId\": \"string\",\n      \"flowName\": \"string\",\n      \"views\": 5396,\n      \"completions\": 7627,\n      \"completionRate\": 60.19912580888012,\n      \"avgTimeToComplete\": 5313.193208687793\n    }\n  ],\n  \"startDate\": \"1982-01-02\",\n  \"endDate\": \"1973-03-26\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://whatfix.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-whatfix-integration-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "49231858-82eb-4b36-8ce0-55d33b8a4c86",
+    "name": "Whatfix Analytics Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management, content management, flow analytics, segmentation, and report downloads. The API is stateless and uses API token authentication via the x-whatfix-integration-key header.\n\nContact Support:\n Name: Whatfix Support\n Email: support@whatfix.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "item": [
+    {
+      "id": "79909c47-15b1-44ac-9719-e6ac34b97569",
+      "name": "Segments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ec26bee7-f098-473b-8782-f4d74a6c3605",
+          "name": "List Segments",
+          "request": {
+            "name": "List Segments",
+            "description": {
+              "content": "Returns all user segments defined in the Whatfix account for content targeting and personalization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":accountId",
+                "segments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated results (1-based)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "20",
+                  "description": "Number of results per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) Your Whatfix account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "60453c7c-2e0f-4c1c-bb1d-e9dedf50c652",
+              "name": "List of segments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":accountId",
+                    "segments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Your Whatfix account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-whatfix-integration-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"segmentId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"userCount\": 5305,\n      \"rules\": [\n        {\n          \"attribute\": \"string\",\n          \"operator\": \"startsWith\",\n          \"value\": {}\n        },\n        {\n          \"attribute\": \"string\",\n          \"operator\": \"equals\",\n          \"value\": {}\n        }\n      ]\n    },\n    {\n      \"segmentId\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"userCount\": 5006,\n      \"rules\": [\n        {\n          \"attribute\": \"string\",\n          \"operator\": \"endsWith\",\n          \"value\": {}\n        },\n        {\n          \"attribute\": \"string\",\n          \"operator\": \"startsWith\",\n          \"value\": {}\n        }\n      ]\n    }\n  ],\n  \"pagination\": {\n    \"page\": 9457,\n    \"pageSize\": 4320,\n    \"totalCount\": 7528,\n    \"totalPages\": 1354\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a668263b-38a4-4a69-a324-44f5d9341fb1",
+              "name": "Invalid API token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":accountId",
+                    "segments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Your Whatfix account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-whatfix-integration-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2340,\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://whatfix.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-whatfix-integration-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "36bc7ccf-232c-44d4-9cab-3aaee29ed606",
+    "name": "Whatfix Analytics Segments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management, content management, flow analytics, segmentation, and report downloads. The API is stateless and uses API token authentication via the x-whatfix-integration-key header.\n\nContact Support:\n Name: Whatfix Support\n Email: support@whatfix.com",
+      "type": "text/plain"
+    }
+  }
+}
