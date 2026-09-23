@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Whatfix Analytics Reports API
+  title: Whatfix Reports API
   description: The Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management, content management, flow analytics, segmentation, and report downloads. The API is stateless and uses API token authentication via the x-whatfix-integration-key header.
   version: v1
   contact:
@@ -49,44 +49,7 @@ paths:
                 type: string
                 description: CSV file with flow analytics data.
 components:
-  parameters:
-    EndDateParam:
-      name: endDate
-      in: query
-      required: false
-      description: End date for analytics range (ISO 8601 date).
-      schema:
-        type: string
-        format: date
-    AccountId:
-      name: accountId
-      in: path
-      required: true
-      description: Your Whatfix account identifier.
-      schema:
-        type: string
-    StartDateParam:
-      name: startDate
-      in: query
-      required: false
-      description: Start date for analytics range (ISO 8601 date).
-      schema:
-        type: string
-        format: date
   schemas:
-    FlowAnalyticsList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/FlowAnalytics'
-        startDate:
-          type: string
-          format: date
-        endDate:
-          type: string
-          format: date
     FlowAnalytics:
       type: object
       description: Analytics data for a Whatfix flow.
@@ -112,6 +75,43 @@ components:
         avgTimeToComplete:
           type: number
           description: Average time in seconds to complete the flow.
+    FlowAnalyticsList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowAnalytics'
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+  parameters:
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Your Whatfix account identifier.
+      schema:
+        type: string
+    EndDateParam:
+      name: endDate
+      in: query
+      required: false
+      description: End date for analytics range (ISO 8601 date).
+      schema:
+        type: string
+        format: date
+    StartDateParam:
+      name: startDate
+      in: query
+      required: false
+      description: Start date for analytics range (ISO 8601 date).
+      schema:
+        type: string
+        format: date
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

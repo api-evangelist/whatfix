@@ -1,11 +1,7 @@
 {
   "provider": "whatfix",
   "sources": [
-    "whatfix-analytics-api-openapi.yml",
-    "whatfix-content-api-openapi.yml",
-    "whatfix-end-users-api-openapi.yml",
-    "whatfix-reports-api-openapi.yml",
-    "whatfix-segments-api-openapi.yml"
+    "_original/whatfix-openapi.yml"
   ],
   "outputs": [
     "whatfix-analytics-api-openapi.yml",
@@ -17,6 +13,21 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "whatfix-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "whatfix-openapi.yml: declared missing tag: Analytics",
+    "whatfix-openapi.yml: declared missing tag: Content",
+    "whatfix-openapi.yml: declared missing tag: End Users",
+    "whatfix-openapi.yml: declared missing tag: Reports",
+    "whatfix-openapi.yml: declared missing tag: Segments",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "whatfix-analytics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "whatfix-content-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "whatfix-end-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "whatfix-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "whatfix-segments-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
