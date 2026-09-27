@@ -49,6 +49,30 @@ paths:
                 type: string
                 description: CSV file with flow analytics data.
 components:
+  parameters:
+    EndDateParam:
+      name: endDate
+      in: query
+      required: false
+      description: End date for analytics range (ISO 8601 date).
+      schema:
+        type: string
+        format: date
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Your Whatfix account identifier.
+      schema:
+        type: string
+    StartDateParam:
+      name: startDate
+      in: query
+      required: false
+      description: Start date for analytics range (ISO 8601 date).
+      schema:
+        type: string
+        format: date
   schemas:
     FlowAnalytics:
       type: object
@@ -88,30 +112,6 @@ components:
         endDate:
           type: string
           format: date
-  parameters:
-    AccountId:
-      name: accountId
-      in: path
-      required: true
-      description: Your Whatfix account identifier.
-      schema:
-        type: string
-    EndDateParam:
-      name: endDate
-      in: query
-      required: false
-      description: End date for analytics range (ISO 8601 date).
-      schema:
-        type: string
-        format: date
-    StartDateParam:
-      name: startDate
-      in: query
-      required: false
-      description: Start date for analytics range (ISO 8601 date).
-      schema:
-        type: string
-        format: date
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

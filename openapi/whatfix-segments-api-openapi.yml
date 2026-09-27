@@ -42,16 +42,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   parameters:
-    PageSizeParam:
-      name: pageSize
-      in: query
-      required: false
-      description: Number of results per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
     AccountId:
       name: accountId
       in: path
@@ -68,6 +58,16 @@ components:
         type: integer
         minimum: 1
         default: 1
+    PageSizeParam:
+      name: pageSize
+      in: query
+      required: false
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
   schemas:
     SegmentList:
       type: object
@@ -78,17 +78,15 @@ components:
             $ref: '#/components/schemas/Segment'
         pagination:
           $ref: '#/components/schemas/Pagination'
-    Pagination:
+    Error:
       type: object
       properties:
-        page:
+        code:
           type: integer
-        pageSize:
-          type: integer
-        totalCount:
-          type: integer
-        totalPages:
-          type: integer
+        message:
+          type: string
+        details:
+          type: string
     Segment:
       type: object
       description: A Whatfix user segment for content targeting.
@@ -126,15 +124,17 @@ components:
                 - notIn
               value:
                 description: Value to compare against.
-    Error:
+    Pagination:
       type: object
       properties:
-        code:
+        page:
           type: integer
-        message:
-          type: string
-        details:
-          type: string
+        pageSize:
+          type: integer
+        totalCount:
+          type: integer
+        totalPages:
+          type: integer
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

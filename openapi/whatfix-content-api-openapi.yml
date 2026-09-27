@@ -67,27 +67,34 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  parameters:
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Your Whatfix account identifier.
+      schema:
+        type: string
+    PageParam:
+      name: page
+      in: query
+      required: false
+      description: Page number for paginated results (1-based).
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+    PageSizeParam:
+      name: pageSize
+      in: query
+      required: false
+      description: Number of results per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
   schemas:
-    ContentList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Content'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-        pageSize:
-          type: integer
-        totalCount:
-          type: integer
-        totalPages:
-          type: integer
     Error:
       type: object
       properties:
@@ -97,6 +104,15 @@ components:
           type: string
         details:
           type: string
+    ContentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Content'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     Content:
       type: object
       description: A Whatfix content item (flow, tooltip, task list, smart tip, etc.).
@@ -139,33 +155,17 @@ components:
         viewCount:
           type: integer
           description: Total number of times this content has been viewed.
-  parameters:
-    PageSizeParam:
-      name: pageSize
-      in: query
-      required: false
-      description: Number of results per page.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 20
-    AccountId:
-      name: accountId
-      in: path
-      required: true
-      description: Your Whatfix account identifier.
-      schema:
-        type: string
-    PageParam:
-      name: page
-      in: query
-      required: false
-      description: Page number for paginated results (1-based).
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalCount:
+          type: integer
+        totalPages:
+          type: integer
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
