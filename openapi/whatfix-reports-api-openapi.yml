@@ -49,31 +49,20 @@ paths:
                 type: string
                 description: CSV file with flow analytics data.
 components:
-  parameters:
-    EndDateParam:
-      name: endDate
-      in: query
-      required: false
-      description: End date for analytics range (ISO 8601 date).
-      schema:
-        type: string
-        format: date
-    AccountId:
-      name: accountId
-      in: path
-      required: true
-      description: Your Whatfix account identifier.
-      schema:
-        type: string
-    StartDateParam:
-      name: startDate
-      in: query
-      required: false
-      description: Start date for analytics range (ISO 8601 date).
-      schema:
-        type: string
-        format: date
   schemas:
+    FlowAnalyticsList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FlowAnalytics'
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
     FlowAnalytics:
       type: object
       description: Analytics data for a Whatfix flow.
@@ -99,19 +88,30 @@ components:
         avgTimeToComplete:
           type: number
           description: Average time in seconds to complete the flow.
-    FlowAnalyticsList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/FlowAnalytics'
-        startDate:
-          type: string
-          format: date
-        endDate:
-          type: string
-          format: date
+  parameters:
+    StartDateParam:
+      name: startDate
+      in: query
+      required: false
+      description: Start date for analytics range (ISO 8601 date).
+      schema:
+        type: string
+        format: date
+    EndDateParam:
+      name: endDate
+      in: query
+      required: false
+      description: End date for analytics range (ISO 8601 date).
+      schema:
+        type: string
+        format: date
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Your Whatfix account identifier.
+      schema:
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
