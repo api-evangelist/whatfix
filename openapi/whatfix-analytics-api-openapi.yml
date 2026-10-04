@@ -140,17 +140,6 @@ paths:
                     $ref: '#/components/schemas/Pagination'
 components:
   schemas:
-    Pagination:
-      type: object
-      properties:
-        page:
-          type: integer
-        pageSize:
-          type: integer
-        totalCount:
-          type: integer
-        totalPages:
-          type: integer
     FlowAnalyticsList:
       type: object
       properties:
@@ -164,38 +153,6 @@ components:
         endDate:
           type: string
           format: date
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        details:
-          type: string
-    TaskCompletion:
-      type: object
-      description: Task completion status for an end user.
-      properties:
-        userId:
-          type: string
-        userEmail:
-          type: string
-          format: email
-        taskListId:
-          type: string
-        taskListName:
-          type: string
-        completedTasks:
-          type: integer
-        totalTasks:
-          type: integer
-        completionRate:
-          type: number
-          format: float
-        lastActivityAt:
-          type: string
-          format: date-time
     FlowAnalytics:
       type: object
       description: Analytics data for a Whatfix flow.
@@ -221,7 +178,57 @@ components:
         avgTimeToComplete:
           type: number
           description: Average time in seconds to complete the flow.
+    TaskCompletion:
+      type: object
+      description: Task completion status for an end user.
+      properties:
+        userId:
+          type: string
+        userEmail:
+          type: string
+          format: email
+        taskListId:
+          type: string
+        taskListName:
+          type: string
+        completedTasks:
+          type: integer
+        totalTasks:
+          type: integer
+        completionRate:
+          type: number
+          format: float
+        lastActivityAt:
+          type: string
+          format: date-time
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        totalCount:
+          type: integer
+        totalPages:
+          type: integer
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
   parameters:
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Your Whatfix account identifier.
+      schema:
+        type: string
     PageSizeParam:
       name: pageSize
       in: query
@@ -232,11 +239,11 @@ components:
         minimum: 1
         maximum: 100
         default: 20
-    StartDateParam:
-      name: startDate
+    EndDateParam:
+      name: endDate
       in: query
       required: false
-      description: Start date for analytics range (ISO 8601 date).
+      description: End date for analytics range (ISO 8601 date).
       schema:
         type: string
         format: date
@@ -249,21 +256,14 @@ components:
         type: integer
         minimum: 1
         default: 1
-    EndDateParam:
-      name: endDate
+    StartDateParam:
+      name: startDate
       in: query
       required: false
-      description: End date for analytics range (ISO 8601 date).
+      description: Start date for analytics range (ISO 8601 date).
       schema:
         type: string
         format: date
-    AccountId:
-      name: accountId
-      in: path
-      required: true
-      description: Your Whatfix account identifier.
-      schema:
-        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

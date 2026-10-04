@@ -89,14 +89,13 @@ components:
           type: number
           description: Average time in seconds to complete the flow.
   parameters:
-    StartDateParam:
-      name: startDate
-      in: query
-      required: false
-      description: Start date for analytics range (ISO 8601 date).
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Your Whatfix account identifier.
       schema:
         type: string
-        format: date
     EndDateParam:
       name: endDate
       in: query
@@ -105,13 +104,14 @@ components:
       schema:
         type: string
         format: date
-    AccountId:
-      name: accountId
-      in: path
-      required: true
-      description: Your Whatfix account identifier.
+    StartDateParam:
+      name: startDate
+      in: query
+      required: false
+      description: Start date for analytics range (ISO 8601 date).
       schema:
         type: string
+        format: date
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
