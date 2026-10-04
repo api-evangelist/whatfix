@@ -113,6 +113,9 @@ apis:
   - type: Developers
     url: https://whatfix.com/developers/
 common:
+  - type: CapabilityMap
+    url: capabilities/whatfix-capability-edges.yml
+    name: Whatfix Business Capability Map
   - type: AgenticAccess
     url: agentic-access/whatfix-agentic-access.yml
   - type: TrustCenter
