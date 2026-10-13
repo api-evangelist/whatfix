@@ -1,0 +1,42 @@
+generated: '2026-10-13'
+method: searched
+checked:
+- https://azuremarketplace.microsoft.com/
+marketplace_apps: []
+edges:
+- partner_name: Microsoft Azure Marketplace
+  partner: microsoft-azure
+  partner_match: aggregator
+  type: marketplace
+  marketplace: azure-marketplace
+  channel: distribution
+  relationship: platform-app
+  direction: provider-built
+  evidence: https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=Whatfix%2C%20Inc
+  listing_count: 5
+  apps:
+  - Whatfix Product Analytics
+  - Whatfix Desktop DAP
+  - Mirror + AI Roleplay
+  - Whatfix Seek
+  - Whatfix Web DAP - Digital Adoption Platform
+  seller_name: Whatfix, Inc
+  detected_by: sweep-cloud-marketplaces.py
+  detected: '2026-10-13'
+- partner_name: Microsoft Azure Marketplace
+  partner: microsoft-azure
+  partner_match: aggregator
+  type: marketplace
+  marketplace: azure-marketplace
+  channel: distribution
+  relationship: platform-app
+  direction: provider-built
+  evidence: https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=Whatfix%20GmbH
+  listing_count: 3
+  apps:
+  - Whatfix Web DAP - Digital Adoption Platform
+  - Whatfix Mirror + AI Roleplay
+  - Whatfix Product Analytics
+  seller_name: Whatfix GmbH
+  detected_by: sweep-cloud-marketplaces.py
+  detected: '2026-10-13'
