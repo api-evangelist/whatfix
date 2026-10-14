@@ -15,3 +15,29 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: whatfix-duck-creek-own
+  label: Duck Creek (own)
+  partner: duck-creek
+  partner_name: Duck Creek (own)
+  category: Solution
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.duckcreek.com/partner/whatfix/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: whatfix-guidewire-own
+  label: Guidewire (own)
+  partner: guidewire
+  partner_name: Guidewire (own)
+  category: Accelerator; Content Management;User Enablement; PolicyCenter
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.guidewire.com/product/01t3n00000TGYzAAAX/01t3n00000TGYzAAAX
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
