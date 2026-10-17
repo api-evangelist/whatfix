@@ -51,6 +51,15 @@ components:
             $ref: '#/components/schemas/Segment'
         pagination:
           $ref: '#/components/schemas/Pagination'
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        details:
+          type: string
     Segment:
       type: object
       description: A Whatfix user segment for content targeting.
@@ -99,23 +108,7 @@ components:
           type: integer
         totalPages:
           type: integer
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        details:
-          type: string
   parameters:
-    AccountId:
-      name: accountId
-      in: path
-      required: true
-      description: Your Whatfix account identifier.
-      schema:
-        type: string
     PageSizeParam:
       name: pageSize
       in: query
@@ -126,6 +119,13 @@ components:
         minimum: 1
         maximum: 100
         default: 20
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Your Whatfix account identifier.
+      schema:
+        type: string
     PageParam:
       name: page
       in: query
