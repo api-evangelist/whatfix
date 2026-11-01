@@ -1,4 +1,4 @@
-# Whatfix (whatfix)
+# Whatfix
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,56 +66,167 @@
 
 Whatfix is a Digital Adoption Platform that delivers in-app guidance, self-help, and product analytics to drive software adoption and user productivity.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/whatfix/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/whatfix/refs/heads/main/apis.yml)
+**Areas:** Digital Adoption · In-App Guidance · Onboarding · Analytics · Self-Help
 
-## Tags
+## Whatfix on APIs.io
 
-- Digital Adoption
-- In-App Guidance
-- Onboarding
-- Analytics
-- Self-Help
+Everything profiled for Whatfix is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/whatfix/](https://apis.io/providers/whatfix/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Created:** 2026-05-08
-- **Modified:** 2026-05-19
+- [Whatfix Analytics API](https://apis.io/apis/whatfix/whatfix-analytics-api/) — The Analytics API from Whatfix — 4 operation(s) for analytics.
+- [Whatfix Content API](https://apis.io/apis/whatfix/whatfix-content-api/) — The Content API from Whatfix — 1 operation(s) for content.
+- [Whatfix End Users API](https://apis.io/apis/whatfix/whatfix-end-users-api/) — The End Users API from Whatfix — 2 operation(s) for end users.
+- [Whatfix Reports API](https://apis.io/apis/whatfix/whatfix-reports-api/) — The Reports API from Whatfix — 1 operation(s) for reports.
+- [Whatfix Segments API](https://apis.io/apis/whatfix/whatfix-segments-api/) — The Segments API from Whatfix — 1 operation(s) for segments.
 
-## APIs
+### Published properties
 
-### Whatfix REST API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Whatfix REST API enables programmatic access to Whatfix platform operations including end-user management, content management, flow analytics, segmentation, and report downloads. Stateless API authenticated via the x-whatfix-integration-key header.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.whatfix.com/](https://docs.whatfix.com/)
-- **Base URL:** `https://whatfix.com/api/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Whatfix Agentic Access](https://apis.io/agentic-access/whatfix/whatfix-agentic-access/)
 
-- Digital Adoption
-- Analytics
-- REST
+#### JSON Schema (2)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://docs.whatfix.com/)
-- [Developers](https://whatfix.com/developers/)
-- [OpenAPI](openapi/whatfix-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/whatfix.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/whatfix.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Whatfix Content](https://apis.io/schemas/whatfix/whatfix-content/)
+- [Whatfix End User](https://apis.io/schemas/whatfix/whatfix-end-user/)
 
-## Common Properties
+#### JSON Structure (2)
 
-- [GitHub Organization](https://github.com/whatfix)
-- [LinkedIn](https://www.linkedin.com/company/whatfix)
+Data models expressed in JSON Structure.
+
+- [Whatfix Content Structure](https://apis.io/json-structure/whatfix/whatfix-content-structure/)
+- [Whatfix End User Structure](https://apis.io/json-structure/whatfix/whatfix-end-user-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Whatfix Context](https://apis.io/jsonld/whatfix/whatfix-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Whatfix Vocabulary](https://apis.io/vocabularies/whatfix/whatfix-vocabulary/)
+
+#### Examples (4)
+
+Example requests and responses.
+
+- [Whatfix Get Flow Analytics Example](https://apis.io/examples/whatfix/whatfix-get-flow-analytics-example/)
+- [Whatfix List Content Example](https://apis.io/examples/whatfix/whatfix-list-content-example/)
+- [Whatfix List End Users Example](https://apis.io/examples/whatfix/whatfix-list-end-users-example/)
+- [Whatfix Upsert End User Example](https://apis.io/examples/whatfix/whatfix-upsert-end-user-example/)
+
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [Whatfix API](https://apis.io/collections/whatfix/open-whatfix/)
+- [Whatfix Analytics API](https://apis.io/collections/whatfix/open-whatfix-analytics-api/)
+- [Whatfix Analytics Content API](https://apis.io/collections/whatfix/open-whatfix-content-api/)
+- [Whatfix Analytics End Users API](https://apis.io/collections/whatfix/open-whatfix-end-users-api/)
+- [Whatfix Analytics Reports API](https://apis.io/collections/whatfix/open-whatfix-reports-api/)
+- [Whatfix Analytics Segments API](https://apis.io/collections/whatfix/open-whatfix-segments-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Whatfix — jsonschema rules](https://apis.io/rules/whatfix/whatfix-jsonschema-spectral-rules/)
+- [Whatfix API Rules](https://apis.io/rules/whatfix/whatfix-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Whatfix Authentication](https://apis.io/security/whatfix/whatfix-authentication/)
+- [Whatfix Domain Security](https://apis.io/security/whatfix/whatfix-domain-security/)
+- [Whatfix Trust Center](https://apis.io/security/whatfix/whatfix-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Whatfix Plans Pricing](https://apis.io/plans/whatfix/whatfix-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Whatfix Rate Limits](https://apis.io/rate-limits/whatfix/whatfix-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Whatfix Finops](https://apis.io/finops/whatfix/whatfix-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://whatfix.com/)
 - [Documentation](https://docs.whatfix.com/)
-- [Plans](plans/whatfix-plans-pricing.yml)
-- [Rate Limits](rate-limits/whatfix-rate-limits.yml)
-- [Fin Ops](finops/whatfix-finops.yml)
-- [L L Ms Txt](https://whatfix.com/llms.txt)
+- [Blog](https://whatfix.com/blog/feed/)
+- [GitHub](https://github.com/whatfix)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 31.8** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 55.0 |
+| Contract governance | 13.6 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 13.2 |
+
+**Agent readiness 23.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 21.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/whatfix/](https://apis.io/providers/whatfix/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Whatfix: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/whatfix/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
